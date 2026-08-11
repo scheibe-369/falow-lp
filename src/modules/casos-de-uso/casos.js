@@ -8,7 +8,7 @@ export default {
     el.id = 'casos-de-uso';
     el.dataset.theme = 'light';
     el.innerHTML = `
-      <div class="mx-auto w-full max-w-[73.5rem] px-5 py-20 md:px-8 md:py-28">
+      <div class="container-pagina py-20 md:py-28">
         <p class="section-eyebrow">${casosData.eyebrow}</p>
         <h2 class="section-title" data-reveal-blur>${casosData.title}</h2>
         <div class="tabs" role="tablist" aria-label="Casos de uso">

@@ -8,7 +8,7 @@ export default {
     const el = document.createElement('footer');
     el.dataset.theme = 'dark';
     el.innerHTML = `
-      <div class="mx-auto flex w-full max-w-[73.5rem] flex-col gap-8 px-5 py-12 md:flex-row md:items-center md:justify-between md:px-8">
+      <div class="container-pagina flex flex-col gap-8 py-12 md:flex-row md:items-center md:justify-between">
         <div class="footer-brand" aria-label="Falow">${brandMark({ size: 24 })}</div>
         <nav aria-label="Rodapé">
           <ul class="flex flex-wrap gap-6">
@@ -18,7 +18,7 @@ export default {
           </ul>
         </nav>
       </div>
-      <div class="mx-auto w-full max-w-[73.5rem] border-t border-white/10 px-5 py-6 md:px-8">
+      <div class="container-pagina border-t border-white/10 py-6">
         <p class="footer-credit">
           © ${new Date().getFullYear()} Falow ·
           <a href="${footerData.credit.href}" target="_blank" rel="noopener">${footerData.credit.label}</a>

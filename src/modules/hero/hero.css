@@ -42,7 +42,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 73.5rem;
+  max-width: var(--container);
   margin-inline: auto;
   padding-inline: var(--gutter);
   /* topo: altura da nav + respiro. base: respiro simples, a conversa
@@ -99,7 +99,7 @@
      ultrawide o canto da tela fica a centenas de px do texto e a composição
      se parte em duas ilhas. (100% - largura do container) / 2 é a margem
      lateral do container. */
-  right: max(var(--gutter), calc((100% - 73.5rem) / 2));
+  right: max(var(--gutter), calc((100% - var(--container)) / 2));
   bottom: clamp(2rem, 8vh, 5.5rem);
   width: min(24rem, calc(100% - 2 * var(--gutter)));
   height: 0;

@@ -9,7 +9,7 @@ export default {
     el.id = 'diferenciais';
     el.dataset.theme = 'light';
     el.innerHTML = `
-      <div class="mx-auto w-full max-w-[73.5rem] px-5 py-20 md:px-8 md:py-28">
+      <div class="container-pagina py-20 md:py-28">
         <p class="section-eyebrow">${diferenciaisData.eyebrow}</p>
         <h2 class="section-title" data-reveal-blur>${diferenciaisData.title}</h2>
         <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

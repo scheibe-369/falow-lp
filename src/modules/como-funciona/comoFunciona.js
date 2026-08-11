@@ -11,7 +11,7 @@ export default {
     el.dataset.theme = 'light';
     el.innerHTML = `
       <div class="cf-sticky">
-        <div class="mx-auto w-full max-w-[73.5rem] px-5 py-20 md:px-8 md:py-28">
+        <div class="container-pagina py-20 md:py-28">
           <p class="section-eyebrow">${comoFuncionaData.eyebrow}</p>
           <h2 class="section-title" data-reveal-blur>${comoFuncionaData.title}</h2>
           <div class="cf-path-mount" aria-hidden="true"></div>

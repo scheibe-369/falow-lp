@@ -10,7 +10,7 @@ export default {
     el.dataset.theme = 'light';
     el.innerHTML = `
       <div class="bd-sticky">
-        <div class="mx-auto grid w-full max-w-[73.5rem] gap-10 px-5 py-20 md:grid-cols-[2fr_3fr] md:px-8 md:py-28">
+        <div class="container-pagina grid gap-10 py-20 md:grid-cols-[2fr_3fr] md:py-28">
           <div class="bd-copy">
             <p class="section-eyebrow">${builderData.eyebrow}</p>
             <h2 class="section-title" data-reveal-blur>${builderData.title}</h2>

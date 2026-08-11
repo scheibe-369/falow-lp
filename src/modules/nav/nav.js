@@ -10,7 +10,7 @@ export default {
     el.className = 'site-nav';
     el.dataset.theme = 'dark';
     el.innerHTML = `
-      <div class="nav-bar mx-auto flex w-full max-w-[73.5rem] items-center justify-between px-5 py-4 md:px-8">
+      <div class="nav-bar container-pagina flex items-center justify-between py-4">
         <a class="nav-brand" href="#hero" aria-label="Falow, início">
           <img class="nav-symbol" src="/brand/falow-icone.webp" alt=""
                width="128" height="128" fetchpriority="high" decoding="async">

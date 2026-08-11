@@ -9,7 +9,7 @@ export default {
     el.id = 'dashboard';
     el.dataset.theme = 'light';
     el.innerHTML = `
-      <div class="mx-auto w-full max-w-[73.5rem] px-5 py-20 md:px-8 md:py-28">
+      <div class="container-pagina py-20 md:py-28">
         <p class="section-eyebrow">${dashboardData.eyebrow}</p>
         <h2 class="section-title" data-reveal-blur>${dashboardData.title}</h2>
         <p class="section-sub" data-reveal>${dashboardData.sub}</p>

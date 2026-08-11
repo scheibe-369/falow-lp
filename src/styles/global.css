@@ -88,18 +88,42 @@
   --space-12: 3rem;
 }
 
-/* Monitor grande (27", 32", ultrawide): os tetos calibrados para notebook
-   deixam a tipografia pequena demais e o conteúdo vira uma ilha no meio da
-   tela. Acima de 1600px os tetos sobem; o termo em vh continua mandando, então
-   tela larga e baixa não é afetada. Abaixo disso nada muda. */
+/* ------------------------------------------------------------
+   Container da página
+   Uma largura fixa de 1176px vira uma coluna estreita no meio de um
+   monitor de 27" ou 32", com as laterais vazias. O container cresce por
+   faixa de largura, para a página ocupar a tela em vez de ficar ilhada.
+   Os blocos de texto têm max-width próprio em ch, então largura maior não
+   estraga a medida de leitura.
+   ------------------------------------------------------------ */
+:root {
+  --container: 73.5rem;
+}
+
 @media (min-width: 1600px) {
   :root {
-    --fs-display: clamp(1.75rem, min(6.4vw, 8.2vh), 5.25rem);
-    --fs-title: clamp(1.9rem, min(4.6vw, 6vh), 3.75rem);
-    --fs-body-lg: clamp(1.0625rem, 1rem + 0.3vw, 1.375rem);
-    --fs-body: clamp(1rem, 0.97rem + 0.16vw, 1.1875rem);
+    --container: 88rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --container: 104rem;
+  }
+}
+
+@media (min-width: 2400px) {
+  :root {
+    --container: 122rem;
     --gutter: clamp(1.25rem, 4vw, 3rem);
   }
+}
+
+.container-pagina {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
 /* ============================================================
