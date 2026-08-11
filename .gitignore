@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.*
+.playwright-mcp/
+.wrangler/
+
+# Material de referência de terceiros (templates e vídeos baixados como
+# inspiração). Fora do versionamento por peso: são 33 MB, com um MP4 de 30 MB
+# que ficaria no histórico permanentemente. Não é fonte do produto.
+efeitos-seções-botoes que quero usar/
