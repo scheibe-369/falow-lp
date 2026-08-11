@@ -1,0 +1,322 @@
+/* ============================================================
+   Hero: foto de fundo + conversa em loop
+   Enquadramento: ver a escala em src/styles/global.css.
+   Prioridade acima da dobra, em qualquer tela: rótulo, título,
+   subtítulo e CTA primário. A conversa é o prêmio logo abaixo
+   quando a tela é baixa demais pra tudo caber junto.
+   ============================================================ */
+#hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100svh;
+  overflow: clip;
+  background: var(--color-falow-black);
+}
+
+/* --- Foto de fundo (LCP: eager + fetchpriority no markup) --- */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 50%;
+  will-change: transform;
+}
+
+/* Véu: escurece a esquerda pro texto ler e puxa a base pro preto */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(6, 8, 7, 0.94) 0%, rgba(6, 8, 7, 0.78) 34%, rgba(6, 8, 7, 0.28) 62%, rgba(6, 8, 7, 0.42) 100%),
+    linear-gradient(to top, rgba(6, 8, 7, 0.86) 0%, transparent 42%),
+    radial-gradient(40rem 26rem at 78% 26%, rgba(50, 232, 117, 0.1), transparent 70%);
+}
+
+/* Layout todo no módulo: utilities do Tailwind aqui brigavam com a
+   cascata (w-full vencia o width das media queries). */
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 73.5rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  /* topo: altura da nav + respiro. base: respiro simples, a conversa
+     fica ancorada no canto e não empurra o conteúdo. */
+  padding-top: clamp(4.5rem, 9vh, 7rem);
+  padding-bottom: var(--space-8);
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-falow-green);
+}
+
+.hero-title {
+  margin-top: var(--space-4);
+  /* o teto em vw garante que a coluna de texto nunca alcance a conversa */
+  max-width: min(17ch, 46vw);
+  font-size: var(--fs-display);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--color-text-inverse);
+  text-wrap: balance;
+}
+
+.hero-sub {
+  margin-top: var(--space-4);
+  max-width: min(42ch, 46vw);
+  font-size: var(--fs-body-lg);
+  line-height: 1.55;
+  color: rgba(247, 248, 243, 0.76);
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: clamp(1.25rem, 3vh, 2.2rem);
+}
+
+/* ============================================================
+   Conversa sobre a foto (pilha ancorada no rodapé)
+   ============================================================ */
+.hero-chat {
+  position: absolute;
+  z-index: 2;
+  right: clamp(1.5rem, 5vw, 6rem);
+  bottom: clamp(2rem, 8vh, 5.5rem);
+  width: min(24rem, calc(100% - 2 * var(--gutter)));
+  height: 0;
+  pointer-events: none;
+}
+
+.hero-msg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+  opacity: 0;
+}
+
+/* Direção explícita: quem escreve na esquerda, Falow responde na direita */
+.hero-msg-in {
+  justify-content: flex-start;
+}
+
+.hero-msg-out {
+  justify-content: flex-end;
+}
+
+.msg-avatar {
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  object-fit: cover;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* hug no conteúdo (não estica): é a largura desigual que faz a bolha
+   ler como vinda de um lado ou do outro */
+.msg-bubble {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 82%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.32);
+}
+
+.msg-text {
+  font-size: var(--fs-body);
+  line-height: 1.35;
+  font-weight: 500;
+}
+
+/* Falow: bolha verde da marca, rabinho na direita */
+.hero-msg-out .msg-bubble {
+  background: var(--color-falow-green);
+  border-bottom-right-radius: 6px;
+  color: var(--color-falow-black);
+}
+
+/* Pessoa: vidro escuro sobre a foto, rabinho na esquerda.
+   Um pouco mais estreita que a do Falow: a borda direita ficando
+   visivelmente curta é o que faz a mensagem ler como "veio da esquerda". */
+.hero-msg-in .msg-bubble {
+  max-width: 74%;
+  background: rgba(20, 26, 22, 0.74);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(247, 248, 243, 0.12);
+  border-bottom-left-radius: 6px;
+  color: rgba(247, 248, 243, 0.94);
+}
+
+/* Botão dentro da bolha (réplica do card do ManyChat) */
+.msg-btn {
+  display: block;
+  margin-top: var(--space-2);
+  padding: 0.6rem var(--space-3);
+  border-radius: var(--radius-sm);
+  background: rgba(247, 248, 243, 0.42);
+  color: var(--color-falow-black);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ============================================================
+   Abaixo de 1024px não sobra largura pra conversa ficar ao lado
+   do texto, então ela sai do canto e entra no fluxo, logo abaixo
+   dos CTAs. Assim nunca cobre o texto, em nenhuma altura de tela.
+   A altura da pilha vem do JS (--stack-h), porque as bolhas são
+   absolutas e sozinhas não ocupam espaço.
+   ============================================================ */
+@media (max-width: 1023px) {
+  .hero-bg {
+    object-position: 68% 50%;
+  }
+
+  .hero-scrim {
+    background:
+      linear-gradient(to top, rgba(6, 8, 7, 0.94) 0%, rgba(6, 8, 7, 0.62) 46%, rgba(6, 8, 7, 0.72) 100%),
+      radial-gradient(30rem 20rem at 70% 20%, rgba(50, 232, 117, 0.1), transparent 70%);
+  }
+
+  .hero-title,
+  .hero-sub {
+    max-width: none;
+  }
+
+  .hero-chat {
+    position: relative;
+    flex: none;
+    align-self: center;
+    right: auto;
+    bottom: auto;
+    width: min(22rem, calc(100% - 2 * var(--gutter)));
+    height: var(--stack-h, 17rem);
+    margin: 0 auto var(--space-8);
+  }
+}
+
+/* Celular baixo em pé (SE, 667px e abaixo): não cabe texto e conversa
+   na mesma tela. Aperta o que dá e aceita que a conversa começa logo
+   abaixo da dobra, o que também dá motivo pra rolar. */
+@media (max-width: 1023px) and (orientation: portrait) and (max-height: 700px) {
+  .hero-inner {
+    padding-top: clamp(4rem, 8vh, 4.75rem);
+    padding-bottom: var(--space-4);
+  }
+
+  .hero-chat {
+    margin-bottom: var(--space-4);
+  }
+}
+
+/* ============================================================
+   Celular deitado (e qualquer tela muito baixa): a altura é o
+   recurso escasso. Vira duas colunas, texto e conversa lado a
+   lado, com o topo enxuto.
+   ============================================================ */
+@media (max-width: 1023px) and (orientation: landscape) and (max-height: 560px) {
+  .hero-inner {
+    padding-top: clamp(3.25rem, 13vh, 4.25rem);
+    padding-bottom: var(--space-4);
+  }
+
+  /* coluna de texto fecha antes da conversa começar */
+  .hero-title,
+  .hero-sub {
+    max-width: min(32ch, 52%);
+  }
+
+  .hero-ctas {
+    max-width: 56%;
+  }
+
+  .hero-sub {
+    font-size: var(--fs-body);
+  }
+
+  .hero-chat {
+    position: absolute;
+    align-self: auto;
+    right: var(--gutter);
+    bottom: var(--space-3);
+    width: min(16.5rem, 34%);
+    height: 0;
+    margin: 0;
+  }
+
+  /* a pilha inteira teria a altura da tela: encolhe a bolha.
+     é mockup decorativo, não texto de leitura, então pode. */
+  .msg-avatar {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .msg-bubble {
+    padding: 0.5rem 0.7rem;
+  }
+
+  .msg-text {
+    font-size: 0.9rem;
+  }
+
+  .msg-btn {
+    margin-top: 0.4rem;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Landscape bem curto (Android pequeno deitado, ~360px de altura):
+   coluna de texto mais larga pra reduzir o número de linhas, senão
+   o CTA primário cai abaixo da dobra. */
+@media (max-width: 1023px) and (orientation: landscape) and (max-height: 420px) {
+  .hero-title {
+    font-size: clamp(1.35rem, min(4.6vw, 7.6vh), 1.9rem);
+  }
+
+  .hero-title,
+  .hero-sub {
+    max-width: min(34ch, 56%);
+  }
+
+  .hero-sub {
+    margin-top: var(--space-3);
+    font-size: 0.95rem;
+  }
+
+  .hero-ctas {
+    max-width: 60%;
+    margin-top: var(--space-3);
+  }
+
+  .hero-chat {
+    width: min(14rem, 30%);
+  }
+
+  .hero-scrim {
+    background:
+      linear-gradient(100deg, rgba(6, 8, 7, 0.94) 0%, rgba(6, 8, 7, 0.72) 45%, rgba(6, 8, 7, 0.38) 100%),
+      linear-gradient(to top, rgba(6, 8, 7, 0.7) 0%, transparent 50%);
+  }
+}
