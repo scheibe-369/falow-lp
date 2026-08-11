@@ -1,0 +1,154 @@
+/* Marcador de 4px no topo: quando ele sai da tela, o scroll começou. */
+.nav-sentinela {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 4px;
+  pointer-events: none;
+}
+
+.site-nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  background: transparent;
+  transition:
+    background var(--duration-slow) var(--ease-standard),
+    color var(--duration-slow) var(--ease-standard),
+    box-shadow var(--duration-slow) var(--ease-standard);
+}
+
+.site-nav[data-theme='dark'] {
+  color: var(--color-text-inverse);
+  background: linear-gradient(rgba(11, 13, 12, 0.85), rgba(11, 13, 12, 0));
+}
+
+.site-nav[data-theme='light'] {
+  color: var(--color-text-primary);
+  background: rgba(247, 248, 243, 0.82);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft-sm);
+}
+
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* Ícone oficial (icone.png). É colorido, não monocromático, então serve
+   nos dois temas sem variante. */
+.nav-symbol {
+  display: block;
+  flex: none;
+  width: clamp(1.6rem, 2.4vw, 1.85rem);
+  height: auto;
+}
+
+/* Wordmark vetorial em currentColor: acompanha o tema do nav sozinho. */
+.nav-wordmark {
+  display: block;
+  overflow: hidden;
+  /* largura máxima em ch pra caber o "falow" sem cortar em nenhuma tela */
+  max-width: 7rem;
+  margin-left: 0.5rem;
+  color: currentColor;
+}
+
+.falow-wordmark {
+  display: block;
+  height: clamp(0.95rem, 1.6vw, 1.15rem);
+  width: auto;
+}
+
+/* ============================================================
+   Nav compacta (ao sair do hero)
+   Como na nav do ManyChat: as letras do wordmark caem uma de cada vez e
+   some tudo, sobrando só o símbolo. A barra em si não muda de forma.
+   ============================================================ */
+.wm-letra {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    transform 0.34s var(--ease-standard),
+    opacity 0.24s ease;
+}
+
+/* Y negativo porque o <g> do wordmark tem scale(0.1,-0.1): o eixo está
+   invertido, então translateY positivo subiria na tela. */
+.site-nav[data-compacta='sim'] .wm-letra {
+  transform: translateY(-130%);
+  opacity: 0;
+}
+
+/* uma por uma, começando pelo "w" e indo até o "f": a palavra recolhe na
+   direção do ícone, em vez de fugir dele */
+.wm-letra:nth-child(5) { transition-delay: 0s; }    /* w */
+.wm-letra:nth-child(4) { transition-delay: 0.05s; } /* o */
+.wm-letra:nth-child(3) { transition-delay: 0.1s; }  /* l */
+.wm-letra:nth-child(2) { transition-delay: 0.15s; } /* a */
+.wm-letra:nth-child(1) { transition-delay: 0.2s; }  /* f */
+
+/* o espaço só fecha depois que a última letra caiu */
+.nav-wordmark {
+  transition:
+    max-width 0.34s var(--ease-out-soft) 0.24s,
+    margin-left 0.34s var(--ease-out-soft) 0.24s;
+}
+
+.site-nav[data-compacta='sim'] .nav-wordmark {
+  max-width: 0;
+  margin-left: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wm-letra,
+  .nav-wordmark {
+    transition: none;
+  }
+
+  .site-nav[data-compacta='sim'] .wm-letra {
+    transition-delay: 0s;
+  }
+}
+
+.nav-link {
+  font-size: 0.92rem;
+  font-weight: 500;
+  opacity: 0.85;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.nav-link:hover {
+  opacity: 1;
+}
+
+.nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.nav-toggle span:nth-child(1) {
+  width: 22px;
+}
+.nav-toggle span:nth-child(2) {
+  width: 14px;
+}
+.nav-toggle span:nth-child(3) {
+  width: 18px;
+}

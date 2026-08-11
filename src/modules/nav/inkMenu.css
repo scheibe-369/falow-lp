@@ -1,0 +1,84 @@
+.ink-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  background: #0b0d0c;
+  color: var(--color-text-inverse);
+  display: grid;
+  place-items: center;
+  clip-path: circle(0px at 100% 0%);
+  pointer-events: none;
+  will-change: clip-path;
+}
+
+.ink-menu.is-open {
+  pointer-events: auto;
+}
+
+body.ink-lock {
+  overflow: hidden;
+}
+
+.ink-menu ul {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.ink-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  letter-spacing: -0.02em;
+  color: var(--color-text-inverse);
+  transition: color var(--duration-base) var(--ease-standard);
+}
+
+.ink-link:hover,
+.ink-link:focus-visible {
+  color: var(--color-falow-green);
+}
+
+.ink-num {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(247, 248, 243, 0.4);
+}
+
+/* Hambúrguer -> X */
+.nav-toggle span {
+  transition:
+    transform var(--duration-slow) var(--ease-standard),
+    width var(--duration-slow) var(--ease-standard),
+    opacity var(--duration-slow) var(--ease-standard);
+}
+
+.nav-toggle.is-open span:nth-child(1) {
+  width: 22px;
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.is-open span:nth-child(3) {
+  width: 22px;
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ink-menu {
+    clip-path: none;
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+
+  .nav-toggle span {
+    transition: none;
+  }
+}
