@@ -1,0 +1,163 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   Falow · tokens do design system (brand/design-system.md §23/24)
+   ============================================================ */
+@theme {
+  /* Brand */
+  --color-falow-black: #0b0d0c;
+  --color-clear-white: #f7f8f3;
+  --color-falow-green: #32e875;
+  --color-trigger-yellow: #ffd43b;
+
+  /* Surfaces */
+  --color-surface-white: #ffffff;
+  --color-surface-soft: #f2f4ee;
+  --color-border-light: #d9ddd5;
+
+  /* Text */
+  --color-text-primary: #0b0d0c;
+  --color-text-secondary: #667068;
+  --color-text-inverse: #f7f8f3;
+
+  /* Functional */
+  /* tint derivada do verde da marca, só pra estado de hover do CTA:
+     o botão acende em vez de escurecer, mantendo o texto preto legível */
+  --color-green-bright: #7ef2a9;
+  --color-green-dark: #087a45;
+  --color-green-soft: #ddfbe8;
+  --color-yellow-soft: #fff3ba;
+  --color-danger: #e5484d;
+  --color-danger-soft: #ffe5e5;
+
+  /* Typography */
+  --font-display: 'Manrope', 'Inter', sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Radius (DS §10) */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  /* Shadows (DS §11) */
+  --shadow-soft-sm: 0 1px 2px rgba(11, 13, 12, 0.06), 0 4px 12px rgba(11, 13, 12, 0.04);
+  --shadow-soft-md: 0 8px 24px rgba(11, 13, 12, 0.08), 0 2px 6px rgba(11, 13, 12, 0.05);
+  --shadow-soft-lg: 0 20px 50px rgba(11, 13, 12, 0.12);
+
+  /* Motion (DS §19) */
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 280ms;
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-swap: cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+/* ============================================================
+   Escala de enquadramento (padrão da página)
+   ------------------------------------------------------------
+   Regra: tipografia de display responde à MENOR dimensão da tela
+   (min(vw, vh)). Escala só por largura quebra em tela baixa: um
+   notebook 1366x768, um 1024x600 e um celular deitado têm largura
+   de desktop e altura de celular, e o título estoura a dobra.
+   Texto de leitura nunca abaixo de 16px (mínimo legível no celular
+   e evita o auto-zoom do iOS em campos).
+   ============================================================ */
+:root {
+  /* Respiro lateral da página, cresce com a tela */
+  --gutter: clamp(1.25rem, 4vw, 2rem);
+
+  /* Display: título de hero. Trava por altura em tela baixa. */
+  --fs-display: clamp(1.75rem, min(6.4vw, 8.2vh), 3.9rem);
+  /* Título de seção */
+  --fs-title: clamp(1.9rem, min(4.6vw, 6vh), 3rem);
+  /* Leitura */
+  --fs-body-lg: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  --fs-body: clamp(1rem, 0.97rem + 0.16vw, 1.0625rem);
+  /* Rótulo em caixa alta com tracking: lê bem menor que corpo */
+  --fs-label: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+
+  /* Ritmo vertical em múltiplos de 8 */
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--color-clear-white);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: var(--color-falow-green);
+  color: var(--color-falow-black);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-falow-green);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Seções por tema */
+[data-theme='dark'] {
+  background: var(--color-falow-black);
+  color: var(--color-text-inverse);
+}
+
+[data-theme='light'] {
+  background: var(--color-clear-white);
+  color: var(--color-text-primary);
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  background: var(--color-falow-green);
+  color: var(--color-falow-black);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  transition: top var(--duration-base) var(--ease-standard);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Estados iniciais de reveal: ver src/effects/reveal/reveal.css (gated). */

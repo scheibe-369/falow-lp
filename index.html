@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Falow · Conversas que viram vendas</title>
+    <meta
+      name="description"
+      content="Automação de DMs e comentários do Instagram: regras de palavra-chave, sequências visuais e dashboard. O Falow responde em segundos e transforma conversas em vendas."
+    />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0b0d0c" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Falow · Conversas que viram vendas" />
+    <meta
+      property="og:description"
+      content="Automação de DMs e comentários do Instagram: regras de palavra-chave, sequências visuais e dashboard. O Falow responde em segundos."
+    />
+    <meta property="og:image" content="/og-cover.webp" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Falow",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "Automação conversacional para Instagram: regras de palavra-chave, sequências visuais e dashboard de conversas.",
+        "inLanguage": "pt-BR"
+      }
+    </script>
+    <script>
+      // Gate anti-FOUC: só marca reveal-on se o JS roda. CSS esconde estados
+      // iniciais apenas sob esta classe + prefers-reduced-motion: no-preference.
+      document.documentElement.classList.add('reveal-on');
+      // Preloader só na primeira visita da sessão e com motion permitido.
+      (function () {
+        var seen = false;
+        try {
+          seen = sessionStorage.getItem('falow-preloaded') === '1';
+        } catch (e) {}
+        var motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+        if (!seen && motionOk) document.documentElement.dataset.preloader = 'on';
+      })();
+    </script>
+    <style>
+      /* CSS crítico do preloader: pinta antes do bundle chegar. */
+      html[data-preloader='on'] body {
+        overflow: hidden;
+      }
+      html[data-preloader='on'] #preloader {
+        display: grid;
+      }
+      #preloader {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        place-items: center;
+        background: #0b0d0c;
+      }
+      #preloader .pl-pill {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: min(320px, 72vw);
+        height: 84px;
+        border-radius: 999px;
+        background: #171a18;
+      }
+      #preloader .pl-bar {
+        position: absolute;
+        inset: 0;
+        transform-origin: left center;
+        transform: scaleX(0);
+        background: #f7f8f3;
+      }
+      #preloader .pl-word {
+        position: relative;
+        z-index: 1;
+        font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+        font-weight: 800;
+        font-size: 2rem;
+        letter-spacing: -0.04em;
+        color: #f7f8f3;
+        mix-blend-mode: difference;
+      }
+      #preloader .pl-tagline {
+        position: absolute;
+        bottom: 2rem;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-family: 'Inter', system-ui, sans-serif;
+        font-size: 0.85rem;
+        color: rgba(247, 248, 243, 0.55);
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Pular para o conteúdo</a>
+
+    <div id="preloader" aria-hidden="true">
+      <div class="pl-pill">
+        <span class="pl-bar"></span>
+        <span class="pl-word">falow</span>
+      </div>
+      <p class="pl-tagline">Conversas que viram vendas.</p>
+    </div>
+
+    <div id="app">
+      <main id="main"></main>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
