@@ -1,0 +1,19 @@
+/* Estados iniciais dos reveals, gated (anti-FOUC, padrão upmind):
+   só escondem quando o JS marcou html.reveal-on E o usuário aceita motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html.reveal-on [data-reveal] {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  html.reveal-on [data-reveal-blur] {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(18px);
+  }
+
+  html.reveal-on [data-reveal-img] {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}

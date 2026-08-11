@@ -1,0 +1,24 @@
+.st-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.st-mask {
+  display: inline-block;
+  overflow: clip;
+  vertical-align: bottom;
+  /* A caixa do inline-block tem a altura do line-height. Em título apertado
+     (hero usa 1.04) isso é menor que o alcance do glifo, e o overflow corta
+     o descendente do "g", "q", "p". A folga aumenta só a área de recorte;
+     o margin negativo devolve o espaço pro layout, então nada se move. */
+  padding-bottom: 0.22em;
+  margin-bottom: -0.22em;
+}
+
+.st-char {
+  display: inline-block;
+  /* precisa passar da altura da máscara (linha + folga do descendente),
+     senão sobra um fiapo de letra aparecendo antes da entrada */
+  transform: translateY(135%);
+  will-change: transform;
+}
