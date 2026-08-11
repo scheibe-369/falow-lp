@@ -1,0 +1,244 @@
+/* ============================================================
+   Primitivos compartilhados (agnósticos de seção)
+   ============================================================ */
+
+/* --- Marca --- */
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+}
+
+.brand-word {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: calc(var(--brand-size, 28px) * 0.95);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+/* --- Eyebrow / títulos de seção --- */
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-green-dark);
+}
+
+[data-theme='dark'] .section-eyebrow {
+  color: var(--color-falow-green);
+}
+
+.section-eyebrow::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--color-falow-green);
+}
+
+.section-title {
+  margin-top: 1rem;
+  font-size: clamp(1.9rem, 4.2vw, 3rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  max-width: 22ch;
+}
+
+.section-sub {
+  margin-top: 1.25rem;
+  max-width: 56ch;
+  font-size: 1.06rem;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+}
+
+[data-theme='dark'] .section-sub {
+  color: rgba(247, 248, 243, 0.66);
+}
+
+/* --- Botões (DS §12) --- */
+/* Cor troca por fade, sem camada varrendo de lado: é assim na referência
+   (damascenafilms usa transition: background-color .5s ease). O verde
+   clareia no hover, então a ação principal ganha peso em vez de perder. */
+.cta-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 1.5rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-falow-green);
+  color: var(--color-falow-black);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(50, 232, 117, 0);
+  transition:
+    background-color 0.5s ease,
+    transform var(--duration-base) var(--ease-standard),
+    box-shadow 0.4s var(--ease-out-soft);
+}
+
+/* texto segue preto: contraste alto nos dois verdes */
+.cta-primary:hover,
+.cta-primary:focus-visible {
+  background-color: var(--color-green-bright);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(50, 232, 117, 0.32);
+}
+
+/* Toque não tem hover: sem isso o botão fica aceso depois do tap */
+@media (hover: none) {
+  .cta-primary:hover {
+    background-color: var(--color-falow-green);
+    box-shadow: none;
+  }
+}
+
+/* --- Rolagem do rótulo (efeito portado da damascenafilms.com.br) ---
+   O rótulo é duplicado: o de cima sobe 110%, o debaixo entra de 110%.
+   Mesma curva e duração da origem; cores e texto são os do Falow. */
+.cta-label {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  /* 1.4 dá folga pro descendente do "ç" e do "g" não bater no recorte */
+  line-height: 1.4;
+}
+
+.cta-roll {
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.65, 0.05, 0, 1);
+}
+
+.cta-roll-dup {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(110%);
+}
+
+.cta:hover .cta-roll,
+.cta:focus-visible .cta-roll {
+  transform: translateY(-110%);
+}
+
+.cta:hover .cta-roll-dup,
+.cta:focus-visible .cta-roll-dup {
+  transform: translateY(0);
+}
+
+/* Toque não tem hover: sem isto o rótulo fica rolado pela metade após o tap */
+@media (hover: none) {
+  .cta:hover .cta-roll {
+    transform: none;
+  }
+
+  .cta:hover .cta-roll-dup {
+    transform: translateY(110%);
+  }
+}
+
+.cta-primary.cta-sm {
+  min-height: 40px;
+  padding: 0 1.1rem;
+  font-size: 0.9rem;
+}
+
+.cta-primary.cta-lg {
+  min-height: 56px;
+  padding: 0 2.2rem;
+  font-size: 1.1rem;
+}
+
+.cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 1.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(247, 248, 243, 0.22);
+  color: var(--color-text-inverse);
+  font-weight: 600;
+  transition:
+    border-color var(--duration-base) var(--ease-standard),
+    background var(--duration-base) var(--ease-standard);
+}
+
+.cta-ghost:hover {
+  border-color: var(--color-falow-green);
+  background: rgba(50, 232, 117, 0.08);
+}
+
+[data-theme='light'] .cta-ghost {
+  border-color: var(--color-border-light);
+  color: var(--color-text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-primary,
+  .cta-ghost,
+  .cta-roll,
+  .cta-roll-dup {
+    transition: none;
+  }
+
+  .cta-primary:hover {
+    transform: none;
+  }
+
+  /* sem movimento: o rótulo original fica, a cópia não entra */
+  .cta:hover .cta-roll {
+    transform: none;
+  }
+
+  .cta:hover .cta-roll-dup {
+    transform: translateY(110%);
+  }
+}
+
+/* --- Badges / pills (DS §15) --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-success {
+  background: var(--color-green-soft);
+  color: var(--color-green-dark);
+}
+
+.badge-neutral {
+  background: #eef1ec;
+  color: #4d5750;
+}
+
+.badge-trigger,
+.badge-yellow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 24px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--color-yellow-soft);
+  color: #6b5600;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+}
