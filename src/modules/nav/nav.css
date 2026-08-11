@@ -31,17 +31,19 @@
   color: var(--color-text-primary);
 }
 
+/* prefixado primeiro, padrão por último: na ordem inversa o minificador
+   descarta o sem prefixo e o Firefox fica sem o blur */
 .site-nav[data-compacta='sim'][data-theme='dark'] {
   background: rgba(11, 13, 12, 0.62);
-  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   box-shadow: 0 1px 0 rgba(247, 248, 243, 0.08);
 }
 
 .site-nav[data-compacta='sim'][data-theme='light'] {
   background: rgba(247, 248, 243, 0.7);
-  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   box-shadow: var(--shadow-soft-sm);
 }
 

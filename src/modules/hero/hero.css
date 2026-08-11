@@ -161,8 +161,8 @@
 .hero-msg-in .msg-bubble {
   max-width: 74%;
   background: rgba(20, 26, 22, 0.74);
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(247, 248, 243, 0.12);
   border-bottom-left-radius: 6px;
   color: rgba(247, 248, 243, 0.94);
