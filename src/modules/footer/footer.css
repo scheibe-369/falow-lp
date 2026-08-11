@@ -1,0 +1,29 @@
+footer[data-theme='dark'] {
+  background: #080a09;
+}
+
+.footer-link {
+  font-size: 0.9rem;
+  color: rgba(247, 248, 243, 0.7);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footer-link:hover {
+  color: var(--color-falow-green);
+}
+
+.footer-credit {
+  font-size: 0.82rem;
+  color: rgba(247, 248, 243, 0.58);
+}
+
+.footer-credit a {
+  color: rgba(247, 248, 243, 0.72);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footer-credit a:hover {
+  color: var(--color-falow-green);
+}

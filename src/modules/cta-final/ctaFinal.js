@@ -1,0 +1,23 @@
+import './ctaFinal.css';
+import { ctaFinalData } from './ctaFinal.data.js';
+import { ringSvg } from '../../shared/ui/brandMark.js';
+import { ctaButton } from '../../shared/ui/ctaButton.js';
+
+export default {
+  id: 'cta-final',
+  render() {
+    const el = document.createElement('section');
+    el.id = 'cta-final';
+    el.dataset.theme = 'dark';
+    el.innerHTML = `
+      <div class="mx-auto flex w-full max-w-[73.5rem] flex-col items-center px-5 py-28 text-center md:px-8 md:py-40">
+        <div class="ctaf-symbol" aria-hidden="true">${ringSvg({ size: 120 })}</div>
+        <h2 class="ctaf-tagline" data-reveal-blur>${ctaFinalData.tagline}</h2>
+        <p class="ctaf-sub" data-reveal>${ctaFinalData.sub}</p>
+        ${ctaButton({ ...ctaFinalData.cta, size: 'cta-lg' })}
+      </div>
+    `;
+    return el;
+  },
+  init() {},
+};

@@ -1,0 +1,83 @@
+#problema {
+  position: relative;
+  background-color: #0b0d0c;
+  background-image: linear-gradient(180deg, #0b0d0c 0%, #0d100e 100%);
+}
+
+.pain-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.pain-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-inverse);
+}
+
+.pain-card p {
+  margin-top: 0.6rem;
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: rgba(247, 248, 243, 0.62);
+}
+
+/* --- Marquee de gatilhos (track 3x, -33.333%) --- */
+.marquee {
+  overflow: clip;
+  background-color: #0b0d0c;
+  border-block: 1px solid rgba(255, 255, 255, 0.08);
+  padding-block: 1rem;
+  margin-top: 3.5rem;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  width: max-content;
+}
+
+.marquee-item {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: rgba(247, 248, 243, 0.55);
+}
+
+.marquee-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: none;
+  border-radius: 999px;
+  background: var(--color-trigger-yellow);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: marquee-scroll 36s linear infinite;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-33.333%);
+    }
+  }
+}
+
+/* Seam curvo pro ato claro */
+#problema::after {
+  content: '';
+  display: block;
+  height: 4.5rem;
+  background: var(--color-clear-white);
+  border-radius: 100% 100% 0 0 / 100% 100% 0 0;
+  margin-top: 4rem;
+}

@@ -1,0 +1,92 @@
+#como-funciona {
+  background: var(--color-clear-white);
+}
+
+/* Modo cinematográfico (>=768px, ativado por JS): a seção fica alta e o
+   conteúdo trava em sticky enquanto o path se desenha. */
+@media (min-width: 768px) {
+  #como-funciona.is-cine {
+    height: 300vh;
+  }
+
+  #como-funciona.is-cine .cf-sticky {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: clip;
+    display: flex;
+    align-items: center;
+  }
+
+  #como-funciona.is-cine .cf-sticky > div {
+    width: 100%;
+    padding-block: 6rem 2rem;
+  }
+
+  #como-funciona.is-cine .cf-steps {
+    margin-top: 1.75rem;
+    gap: 1.1rem;
+  }
+}
+
+.cf-steps {
+  position: relative;
+  display: grid;
+  gap: 2.25rem;
+  margin-top: 3rem;
+  max-width: 60rem;
+}
+
+.cf-step {
+  position: relative;
+  width: min(100%, 26rem);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-white);
+  box-shadow: var(--shadow-soft-sm);
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .cf-step-right {
+    justify-self: end;
+  }
+}
+
+.cf-step-n {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  color: var(--color-green-dark);
+}
+
+.cf-step h3 {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.cf-step p {
+  margin-top: 0.5rem;
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+}
+
+.cf-step .badge-trigger {
+  margin-top: 0.9rem;
+}
+
+/* Monte do path (F4 injeta o SVG aqui) */
+.cf-path-mount {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cf-steps {
+  position: relative;
+  z-index: 1;
+}

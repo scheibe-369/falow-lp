@@ -1,0 +1,55 @@
+#casos-de-uso {
+  background: var(--color-clear-white);
+}
+
+.tabs {
+  display: inline-flex;
+  gap: 0.4rem;
+  margin-top: 2.5rem;
+  padding: 0.35rem;
+  border: 1px solid var(--color-border-light);
+  border-radius: 999px;
+  background: var(--color-surface-white);
+}
+
+.tab {
+  min-height: 44px;
+  padding: 0 1.25rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition:
+    background var(--duration-base) var(--ease-standard),
+    color var(--duration-base) var(--ease-standard);
+}
+
+.tab[aria-selected='true'] {
+  background: var(--color-falow-black);
+  color: var(--color-clear-white);
+}
+
+.tab-panel {
+  margin-top: 2rem;
+}
+
+.case-card {
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-white);
+  box-shadow: var(--shadow-soft-sm);
+  padding: 1.5rem;
+}
+
+.case-card h3 {
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.case-card p {
+  margin-top: 0.5rem;
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+}

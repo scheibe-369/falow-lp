@@ -1,0 +1,229 @@
+#builder {
+  background: var(--color-surface-soft);
+}
+
+/* Modo cinematográfico (>=768px + motion): seção alta, grid sticky. */
+@media (min-width: 768px) {
+  #builder.is-cine {
+    height: 250vh;
+  }
+
+  #builder.is-cine .bd-sticky {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: clip;
+    display: flex;
+    align-items: center;
+  }
+
+  #builder.is-cine .bd-sticky > div {
+    width: 100%;
+  }
+}
+
+.bd-stages {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.bd-stage {
+  border-left: 3px solid var(--color-border-light);
+  padding-left: 1rem;
+}
+
+.bd-stage h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.bd-stage p {
+  margin-top: 0.25rem;
+  font-size: var(--fs-body);
+  color: var(--color-text-secondary);
+}
+
+.bd-stage.is-active {
+  border-left-color: var(--color-falow-green);
+}
+
+/* --- Mockup do canvas de sequências --- */
+.sq-frame {
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-white);
+  box-shadow: var(--shadow-soft-md);
+  overflow: clip;
+}
+
+.sq-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.sq-toolbar-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-right: 0.25rem;
+}
+
+.sq-tool {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xs);
+  color: var(--color-text-primary);
+  background: var(--color-clear-white);
+  white-space: nowrap;
+}
+
+.sq-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: auto;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-green-dark);
+}
+
+.sq-active-dot {
+  width: 1.6rem;
+  height: 0.95rem;
+  border-radius: 999px;
+  background: var(--color-falow-green);
+  position: relative;
+}
+
+.sq-active-dot::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: calc(0.95rem - 4px);
+  height: calc(0.95rem - 4px);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.sq-canvas {
+  position: relative;
+  aspect-ratio: 2 / 1;
+  min-height: 18rem;
+  background-image: radial-gradient(rgba(11, 13, 12, 0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.sq-wires {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sq-wire {
+  fill: none;
+  stroke: var(--color-falow-green);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.sq-spark {
+  fill: var(--color-trigger-yellow);
+}
+
+.sq-node {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-white);
+  box-shadow: var(--shadow-soft-sm);
+  padding: 0.6rem 0.7rem;
+}
+
+.sq-node-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.sq-node-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+}
+
+.sq-node-icon[data-kind='gatilho'] {
+  background: var(--color-trigger-yellow);
+  color: var(--color-falow-black);
+}
+
+.sq-node-icon[data-kind='mensagem'],
+.sq-node-icon[data-kind='botoes'] {
+  background: var(--color-green-soft);
+  color: var(--color-green-dark);
+}
+
+.sq-node-kind {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.sq-node-body {
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.1rem;
+  line-height: 1.35;
+}
+
+.sq-node-handle {
+  margin-left: auto;
+  width: 0.55rem;
+  height: 0.55rem;
+  flex: none;
+  align-self: center;
+  border-radius: 999px;
+  background: var(--color-falow-green);
+}
+
+.sq-node-badges {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.sq-chip {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border-light);
+  background: var(--color-clear-white);
+}
+
+@media (max-width: 640px) {
+  .sq-canvas {
+    aspect-ratio: auto;
+    height: 20rem;
+  }
+
+  .sq-active {
+    display: none;
+  }
+}
