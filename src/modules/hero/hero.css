@@ -185,6 +185,20 @@
   text-align: center;
 }
 
+/* No desktop texto e conversa ficam lado a lado, então o bloco não precisa
+   ficar no meio da altura: centralizado, sobravam mais de 400px de vazio
+   entre a navbar e o rótulo em tela alta. Ancorado no topo com respiro
+   proporcional à altura, o conteúdo sobe e a composição fecha. */
+@media (min-width: 1024px) {
+  #hero {
+    justify-content: flex-start;
+  }
+
+  .hero-inner {
+    padding-top: clamp(6rem, 19vh, 13rem);
+  }
+}
+
 /* ============================================================
    Abaixo de 1024px não sobra largura pra conversa ficar ao lado
    do texto, então ela sai do canto e entra no fluxo, logo abaixo
