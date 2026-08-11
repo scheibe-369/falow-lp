@@ -34,22 +34,39 @@
   display: grid;
   gap: 2.25rem;
   margin-top: 3rem;
-  max-width: 60rem;
+  max-width: var(--cf-largura, 60rem);
 }
 
 .cf-step {
   position: relative;
-  width: min(100%, 26rem);
+  width: min(100%, var(--cf-card, 26rem));
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-md);
   background: var(--color-surface-white);
   box-shadow: var(--shadow-soft-sm);
-  padding: 1.5rem;
+  padding: var(--card-padding);
 }
 
 @media (min-width: 768px) {
   .cf-step-right {
     justify-self: end;
+  }
+}
+
+/* Em tela grande os 60rem fixos deixavam o path e os cards espremidos na
+   metade esquerda, com o resto da seção vazio. Largura e card acompanham. */
+@media (min-width: 1600px) {
+  .cf-steps {
+    --cf-largura: 76rem;
+    --cf-card: 31rem;
+    gap: 2.75rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .cf-steps {
+    --cf-largura: 90rem;
+    --cf-card: 34rem;
   }
 }
 
@@ -63,7 +80,7 @@
 
 .cf-step h3 {
   margin-top: 0.5rem;
-  font-size: 1.2rem;
+  font-size: var(--card-title);
   font-weight: 700;
 }
 

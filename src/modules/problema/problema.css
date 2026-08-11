@@ -7,12 +7,12 @@
 .pain-card {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-md);
-  padding: 1.5rem;
+  padding: var(--card-padding);
   background: rgba(255, 255, 255, 0.02);
 }
 
 .pain-card h3 {
-  font-size: 1.15rem;
+  font-size: var(--card-title);
   font-weight: 700;
   color: var(--color-text-inverse);
 }

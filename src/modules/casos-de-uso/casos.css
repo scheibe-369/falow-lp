@@ -39,11 +39,11 @@
   border-radius: var(--radius-md);
   background: var(--color-surface-white);
   box-shadow: var(--shadow-soft-sm);
-  padding: 1.5rem;
+  padding: var(--card-padding);
 }
 
 .case-card h3 {
-  font-size: 1.08rem;
+  font-size: var(--card-title);
   font-weight: 700;
 }
 

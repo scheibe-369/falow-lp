@@ -79,6 +79,10 @@
   /* Rótulo em caixa alta com tracking: lê bem menor que corpo */
   --fs-label: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
 
+  /* Componentes: crescem junto com o container em tela grande */
+  --card-padding: 1.5rem;
+  --card-title: 1.1rem;
+
   /* Ritmo vertical em múltiplos de 8 */
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -100,15 +104,24 @@
   --container: 73.5rem;
 }
 
+/* Alargar o container sem crescer o que vai dentro só troca "coluna estreita"
+   por "cards pequenos boiando". Componente e texto sobem junto. */
 @media (min-width: 1600px) {
   :root {
     --container: 88rem;
+    --card-padding: 2rem;
+    --card-title: 1.3rem;
+    --fs-title: clamp(1.9rem, min(4.6vw, 6vh), 3.5rem);
+    --fs-body: clamp(1rem, 0.97rem + 0.16vw, 1.125rem);
+    --fs-body-lg: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
   }
 }
 
 @media (min-width: 1920px) {
   :root {
     --container: 104rem;
+    --card-padding: 2.5rem;
+    --card-title: 1.45rem;
   }
 }
 
