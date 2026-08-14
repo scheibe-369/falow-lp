@@ -193,11 +193,39 @@ Tailwind v4 + JS vanilla modular (Feature-Sliced) + GSAP npm.
       então `translateY` positivo sobe na tela, e as letras subiram em vez de
       descer. Direção conferida em coordenadas de tela (topo 0 -> 24px).
 
-## Pendências (com o usuário)
+- [x] **F14 Símbolo medido no vetor oficial + preloader é a logo se montando
+      (14/08/2026)**: o usuário apontou que a marca do preloader era inventada.
+      Era mesmo: o `ringSvg` tinha sido desenhado de olho, com a lacuna no topo
+      (em vez do canto superior esquerdo) e o traço quase 50% mais grosso que o
+      real.
+      Geometria refeita **por medição**, não por desenho: os subpaths do
+      `svg.svg` foram achatados (béziers amostradas) e o anel e o ponto
+      passaram por ajuste de círculo por mínimos quadrados, iterando pra separar
+      arco externo de arco interno. Saiu centro (974.27, 820.07), raio de linha
+      de centro 292.79, espessura 103.07, lacuna de 52.02° centrada em 222.4°,
+      ponto r=77.30 a 1.179 raio de distância. Conferido sobrepondo o arco
+      reconstruído no arquivo original: fecha sem folga.
+      Preloader reescrito: a pílula com barra de progresso saiu, quem indica
+      progresso agora é o próprio anel (a marca já tem forma de barra circular).
+      Ordem: ponto amarelo dispara (o gatilho) -> o anel corre em volta e fecha
+      o ciclo -> o símbolo recua e as 5 letras sobem uma a uma, completando a
+      assinatura -> a íris abre a partir do **furo do anel**.
+      Símbolo e palavra vivem no MESMO `<svg>`, com a viewBox no bbox da
+      assinatura oficial: espaçamento e alinhamento saem de graça, sem medir
+      nada em runtime. Só o símbolo vem no `index.html` (pinta no 1º quadro);
+      o path grande da palavra entra por JS. A espera de `fonts.ready` saiu do
+      começo (tela preta parada por até 1.2s) e virou uma pausa antes da íris.
+      Rodapé passou a usar o wordmark vetorial, nas proporções da assinatura
+      oficial (palavra 0.903 do diâmetro do anel, respiro 0.2065).
+      Três armadilhas do GSAP no caminho, registradas: (1) `xPercent` não mede
+      `<svg>` raiz (não tem `offsetWidth`), por isso o transform mora numa div;
+      (2) o GSAP lê o `translateX(%)` que o CSS crítico deixou e guarda como px,
+      então `xPercent` **soma** em cima: precisa de `x: 0` explícito;
+      (3) `transform: scale(0)` no CSS é degenerado, e ao rebasear a origem o
+      GSAP gera um deslocamento lixo: o estado inicial escondido tem que ser por
+      opacidade. Verificado em 1440 e 375, dev e build.
 
-- [ ] Vetor oficial do wordmark `falow` para os usos que ainda dependem da
-      aproximação Manrope 800 (rodapé). A nav já usa o PNG oficial, mas um
-      SVG evitaria as duas variantes raster e escalaria melhor.
+## Pendências (com o usuário)
 - [ ] Links de Termos/Privacidade do footer.
 - [ ] Planos/preços (módulo `pricing-cta` troca de CTA pra tabela sem tocar
       no resto).

@@ -140,8 +140,20 @@ falow-lp/
   tasks/               # todo.md (progresso), research/ (prints do produto)
 ```
 
+### Marca em vetor (nao redesenhar de olho)
+- **Wordmark**: `src/shared/ui/falowWordmark.js`, extraido do `svg.svg` oficial
+  (1 path por letra, miolos de "a" e "o" como furo via `fill-rule: evenodd`).
+- **Simbolo (anel + ponto)**: `src/shared/ui/brandMark.js`. A geometria foi
+  **medida** no `svg.svg` (ajuste de circulo sobre o tracado), nao desenhada:
+  lacuna de 52.02° centrada em 222.4° (canto superior esquerdo), espessura
+  0.352 do raio, ponto com raio 0.264 e distancia 1.179 do raio.
+  `ASSINATURA` guarda a versao no espaco de coordenadas do vetor original, que
+  o preloader anima; esses numeros estao espelhados no `<svg id="pl-lockup">`
+  do `index.html` (marcacao critica). Mexeu num, mexe no outro.
+- Qualquer novo uso da marca sai daqui. Nao remontar com fonte comum nem
+  aproximar o anel no olho.
+
 ### Pendencias com o usuario
-- Vetor oficial do wordmark `falow` (hoje aproximacao Manrope 800, DS §7.3).
 - Termos/Privacidade do footer; planos/precos (modulo pricing-cta vira tabela).
 - Dominio de deploy + aprovacao para primeiro commit.
 

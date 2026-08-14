@@ -49,7 +49,9 @@
       })();
     </script>
     <style>
-      /* CSS crítico do preloader: pinta antes do bundle chegar. */
+      /* CSS crítico do preloader: pinta antes do bundle chegar.
+         A geometria do #pl-lockup é a da assinatura oficial e está espelhada
+         em src/shared/ui/brandMark.js (ASSINATURA). Mexeu num, mexe no outro. */
       html[data-preloader='on'] body {
         overflow: hidden;
       }
@@ -62,41 +64,43 @@
         inset: 0;
         z-index: 90;
         place-items: center;
+        overflow: hidden;
         background: #0b0d0c;
       }
-      #preloader .pl-pill {
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: min(320px, 72vw);
-        height: 84px;
-        border-radius: 999px;
-        background: #171a18;
-      }
-      #preloader .pl-bar {
-        position: absolute;
-        inset: 0;
-        transform-origin: left center;
-        transform: scaleX(0);
-        background: #f7f8f3;
-      }
-      #preloader .pl-word {
-        position: relative;
-        z-index: 1;
-        font-family: 'Manrope', 'Inter', system-ui, sans-serif;
-        font-weight: 800;
-        font-size: 2rem;
-        letter-spacing: -0.04em;
+      /* Nasce com só o símbolo, centrado e grande: a palavra entra depois e a
+         assinatura recua pro lugar dela. O deslocamento e a origem são os da
+         ASSINATURA, então o primeiro quadro já está no lugar certo sem JS.
+         Quem carrega o transform é a div, não o <svg>: xPercent do GSAP mede
+         offsetWidth, que SVG raiz não tem. */
+      #pl-lockup {
+        width: min(600px, 76vw);
         color: #f7f8f3;
-        mix-blend-mode: difference;
+        transform-origin: 11.824% 50%;
+        transform: translateX(38.176%) scale(1.75);
+      }
+      #pl-logo {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      /* 1574 = comprimento do arco (raio 292.79 x abertura de 307.98°) */
+      #pl-arc {
+        stroke-dasharray: 1574;
+        stroke-dashoffset: 1574;
+      }
+      /* Escondido por opacidade, não por scale(0): ao rebasear a origem pro
+         centro do ponto, o GSAP tenta preservar o transform que já estava no
+         CSS, e um scale(0) é degenerado (não tem inversa). O resultado é um
+         deslocamento lixo. Quem zera a escala é o GSAP, já com a origem certa. */
+      #pl-dot {
+        opacity: 0;
       }
       #preloader .pl-tagline {
         position: absolute;
         bottom: 2rem;
         left: 0;
         right: 0;
+        opacity: 0;
         text-align: center;
         font-family: 'Inter', system-ui, sans-serif;
         font-size: 0.85rem;
@@ -108,9 +112,20 @@
     <a class="skip-link" href="#main">Pular para o conteúdo</a>
 
     <div id="preloader" aria-hidden="true">
-      <div class="pl-pill">
-        <span class="pl-bar"></span>
-        <span class="pl-word">falow</span>
+      <!-- Só o símbolo vem no HTML, pra pintar no primeiro quadro. O wordmark
+           (path grande) é injetado pelo preloader.js dentro deste mesmo <svg>,
+           já na posição oficial: a viewBox é o bbox da assinatura inteira. -->
+      <div id="pl-lockup">
+        <svg id="pl-logo" viewBox="629.94 475.74 2912.06 688.66" fill="none" aria-hidden="true">
+          <path
+            id="pl-arc"
+            d="M 866.53 547.82 A 292.79 292.79 0 1 1 693.38 737.45"
+            stroke="#32E875"
+            stroke-width="103.07"
+            stroke-linecap="round"
+          />
+          <circle id="pl-dot" cx="723.79" cy="582.65" r="77.3" fill="#FFD43B" />
+        </svg>
       </div>
       <p class="pl-tagline">Conversas que viram vendas.</p>
     </div>

@@ -2,8 +2,9 @@
 // O arquivo original é um traço invertido: um retângulo do tamanho da tela
 // com o logo recortado como furo. Aqui ficaram só os 5 subpaths das letras
 // mais os 2 miolos ("a" e "o"), com fill-rule evenodd pra eles voltarem a
-// ser furo. O anel e o ponto saíram: o símbolo continua sendo o ringSvg,
-// que é vetor próprio e precisa das cores da marca.
+// ser furo. O anel e o ponto saíram daqui porque precisam das cores da marca:
+// eles viram arco + círculo em brandMark.js, com a geometria medida no mesmo
+// arquivo oficial.
 //
 // Usa currentColor de propósito: assim o wordmark acompanha o tema do nav
 // (claro sobre seção escura, escuro sobre seção clara) sem precisar de duas
@@ -24,14 +25,23 @@ const LETRAS = [
   { nome: 'w', d: SUB[4] },
 ];
 
-export function falowWordmark() {
+// O <g> que embrulha as letras. Fica exportado porque a assinatura completa
+// (falowLockup) precisa das mesmas letras no sistema de coordenadas do vetor
+// oficial, e não numa viewBox recortada só na palavra.
+// Atenção ao scale(0.1,-0.1): dentro desse grupo o eixo Y está invertido,
+// então translateY positivo sobe na tela.
+export function wordmarkGrupo({ classe = 'fl-word' } = {}) {
   const paths = LETRAS.map(
     (l) =>
       `<path class="wm-letra" data-letra="${l.nome}" fill="currentColor" fill-rule="evenodd" d="${l.d}"/>`
   ).join('');
+  return `<g class="${classe}" transform="translate(0,1695) scale(0.1,-0.1)">${paths}</g>`;
+}
+
+export function falowWordmark() {
   return `
     <svg class="falow-wordmark" viewBox="1461 517 2081 622" aria-hidden="true">
-      <g transform="translate(0,1695) scale(0.1,-0.1)">${paths}</g>
+      ${wordmarkGrupo({ classe: 'wm-grupo' })}
     </svg>
   `;
 }

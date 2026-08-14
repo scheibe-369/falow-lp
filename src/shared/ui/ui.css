@@ -2,19 +2,36 @@
    Primitivos compartilhados (agnósticos de seção)
    ============================================================ */
 
-/* --- Marca --- */
+/* --- Marca ---
+   Assinatura = símbolo + wordmark, os dois em vetor oficial. O wordmark é
+   ativo próprio da marca (DS §7.3): não remontar com fonte comum.
+   As três medidas abaixo saem da assinatura oficial, em fração do diâmetro
+   do anel: palavra 0.903, respiro entre os dois 0.2065. Como a viewBox do
+   símbolo tem 2/64 de folga de cada lado, o anel visível vale 0.9375 do
+   --brand-size, e é por isso que os fatores aqui vêm multiplicados por ele. */
 .brand-mark {
   display: inline-flex;
   align-items: center;
-  gap: 0.55em;
+  gap: calc(var(--brand-size, 28px) * 0.162);
 }
 
-.brand-word {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: calc(var(--brand-size, 28px) * 0.95);
-  letter-spacing: -0.04em;
-  line-height: 1;
+.brand-mark .falow-symbol {
+  display: block;
+  flex: none;
+}
+
+.brand-mark .falow-wordmark {
+  display: block;
+  height: calc(var(--brand-size, 28px) * 0.847);
+  width: auto;
+  color: currentColor;
+}
+
+/* Cada letra é um path próprio pra poder animar uma de cada vez (nav compacta,
+   preloader). Sem fill-box o transform giraria em torno da origem da viewBox. */
+.wm-letra {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 /* --- Eyebrow / títulos de seção --- */

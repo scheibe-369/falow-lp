@@ -72,7 +72,7 @@
   color: currentColor;
 }
 
-.falow-wordmark {
+.nav-wordmark .falow-wordmark {
   display: block;
   height: clamp(0.95rem, 1.6vw, 1.15rem);
   width: auto;
@@ -83,9 +83,10 @@
    Como na nav do ManyChat: as letras do wordmark caem uma de cada vez e
    some tudo, sobrando só o símbolo. A barra em si não muda de forma.
    ============================================================ */
-.wm-letra {
-  transform-box: fill-box;
-  transform-origin: center;
+/* Transição escopada na nav de propósito: o mesmo wordmark aparece no
+   preloader e no rodapé, e lá quem anima é o GSAP. Transição solta em
+   .wm-letra global brigaria com ele. */
+.site-nav .wm-letra {
   transition:
     transform 0.34s var(--ease-standard),
     opacity 0.24s ease;
@@ -100,11 +101,11 @@
 
 /* uma por uma, começando pelo "w" e indo até o "f": a palavra recolhe na
    direção do ícone, em vez de fugir dele */
-.wm-letra:nth-child(5) { transition-delay: 0s; }    /* w */
-.wm-letra:nth-child(4) { transition-delay: 0.05s; } /* o */
-.wm-letra:nth-child(3) { transition-delay: 0.1s; }  /* l */
-.wm-letra:nth-child(2) { transition-delay: 0.15s; } /* a */
-.wm-letra:nth-child(1) { transition-delay: 0.2s; }  /* f */
+.site-nav .wm-letra:nth-child(5) { transition-delay: 0s; }    /* w */
+.site-nav .wm-letra:nth-child(4) { transition-delay: 0.05s; } /* o */
+.site-nav .wm-letra:nth-child(3) { transition-delay: 0.1s; }  /* l */
+.site-nav .wm-letra:nth-child(2) { transition-delay: 0.15s; } /* a */
+.site-nav .wm-letra:nth-child(1) { transition-delay: 0.2s; }  /* f */
 
 /* o espaço só fecha depois que a última letra caiu */
 .nav-wordmark {
@@ -119,7 +120,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wm-letra,
+  .site-nav .wm-letra,
   .nav-wordmark {
     transition: none;
   }

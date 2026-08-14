@@ -1,6 +1,6 @@
 import './ctaFinal.css';
 import { ctaFinalData } from './ctaFinal.data.js';
-import { ringSvg } from '../../shared/ui/brandMark.js';
+import { falowSymbol } from '../../shared/ui/brandMark.js';
 import { ctaButton } from '../../shared/ui/ctaButton.js';
 
 export default {
@@ -11,7 +11,7 @@ export default {
     el.dataset.theme = 'dark';
     el.innerHTML = `
       <div class="container-pagina flex flex-col items-center py-28 text-center md:py-40">
-        <div class="ctaf-symbol" aria-hidden="true">${ringSvg({ size: 120 })}</div>
+        <div class="ctaf-symbol" aria-hidden="true">${falowSymbol({ size: 120 })}</div>
         <h2 class="ctaf-tagline" data-reveal-blur>${ctaFinalData.tagline}</h2>
         <p class="ctaf-sub" data-reveal>${ctaFinalData.sub}</p>
         ${ctaButton({ ...ctaFinalData.cta, size: 'cta-lg' })}
