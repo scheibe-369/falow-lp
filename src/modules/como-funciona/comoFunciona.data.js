@@ -1,6 +1,7 @@
 export const comoFuncionaData = {
   eyebrow: 'Como funciona',
   title: 'Do comentário à venda em quatro passos.',
+  sub: 'Sem instalar nada. Da conta conectada à primeira resposta automática, ainda hoje.',
   steps: [
     {
       n: '01',

@@ -1,6 +1,6 @@
 export const dashboardData = {
   eyebrow: 'Dashboard',
-  title: 'Você vê o que está funcionando.',
+  title: 'Você vê o que está funcionando, e faz mais disso.',
   sub: 'Mensagens recebidas, respostas enviadas, taxa de match e contatos únicos. Atividade dos últimos 14 dias, sem planilha.',
   kpis: [
     { label: 'Mensagens recebidas', value: 742, hint: 'DMs processadas' },

@@ -1,5 +1,5 @@
 export const ctaFinalData = {
   tagline: 'Conversas que viram vendas.',
-  sub: 'Comece hoje. Sua próxima venda pode estar num comentário de agora.',
+  sub: 'Comentário vira DM. DM vira conversa. Conversa vira venda. A próxima pode estar rolando agora.',
   cta: { label: 'Começar agora', href: '#comecar' },
 };

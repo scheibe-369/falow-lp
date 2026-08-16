@@ -15,6 +15,9 @@ export default {
           <p>${pricingCtaData.sub}</p>
           ${ctaButton(pricingCtaData.cta)}
         </div>
+        <ul class="pricing-trust" data-reveal>
+          ${pricingCtaData.trust.map((t) => `<li class="badge badge-success">${t}</li>`).join('')}
+        </ul>
       </div>
     `;
     return el;

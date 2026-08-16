@@ -8,7 +8,7 @@ export const casosData = {
       bullets: [
         { title: 'Entregue automação como serviço', body: 'Configure em minutos o que o cliente levaria semanas para montar.' },
         { title: 'Padronize fluxos entre clientes', body: 'A mesma sequência validada, replicada em cada conta.' },
-        { title: 'Mostre resultado com o dashboard', body: 'Métricas claras para segurar o contrato todo mês.' },
+        { title: 'Renove contrato com dado, não com promessa', body: 'Métricas claras na mão, prontas para mostrar no fechamento de todo mês.' },
       ],
     },
     {

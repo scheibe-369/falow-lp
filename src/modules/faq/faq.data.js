@@ -7,6 +7,10 @@ export const faqData = {
       a: 'Com DMs e comentários do Instagram, conectados via Meta. Você define gatilhos por palavra-chave e o Falow responde automaticamente.',
     },
     {
+      q: 'Isso substitui um atendente?',
+      a: 'Não. O Falow automatiza o primeiro contato: responde rápido, qualifica e leva pra conversa de venda. Atendimento humano continua para o que só uma pessoa resolve.',
+    },
+    {
       q: 'Preciso saber programar?',
       a: 'Não. As regras são do tipo "se receber X, responda Y", e as sequências são montadas num canvas visual de arrastar e conectar.',
     },

@@ -5,13 +5,13 @@ export const diferenciaisData = {
     {
       icon: 'workflow',
       title: 'Builder visual de verdade',
-      body: 'Sequências em canvas com ramificação real, não formulário disfarçado de fluxo.',
+      body: 'Sequências em canvas com ramificação real, pensadas pra conversa que vende.',
       accent: 'green',
     },
     {
       icon: 'zap',
       title: 'Gatilhos que disparam na hora',
-      body: 'Palavra-chave detectada, resposta enviada em segundos. Sem fila, sem espera.',
+      body: 'Palavra-chave detectada, resposta enviada em segundos, antes que o lead esfrie.',
       accent: 'yellow',
     },
     {

@@ -1,7 +1,7 @@
 export const heroData = {
-  eyebrow: 'Automação de DMs e comentários para Instagram',
+  eyebrow: 'Automação de DM e comentário no Instagram, sem código',
   title: 'Seu Instagram responde em segundos. Você vende.',
-  sub: 'Regras de palavra-chave e sequências visuais que transformam DMs e comentários em conversas, e conversas em vendas.',
+  sub: 'Regras de palavra-chave e sequências visuais que transformam DM e comentário em conversa, e conversa em venda.',
   ctaPrimary: { label: 'Começar agora', href: '#comecar' },
   ctaGhost: { label: 'Ver como funciona', href: '#como-funciona' },
 

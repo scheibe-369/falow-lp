@@ -14,6 +14,7 @@ export default {
         <div class="container-pagina py-20 md:py-28">
           <p class="section-eyebrow">${comoFuncionaData.eyebrow}</p>
           <h2 class="section-title" data-reveal-blur>${comoFuncionaData.title}</h2>
+          <p class="section-sub" data-reveal>${comoFuncionaData.sub}</p>
           <div class="cf-path-mount" aria-hidden="true"></div>
           <ol class="cf-steps">
             ${comoFuncionaData.steps
