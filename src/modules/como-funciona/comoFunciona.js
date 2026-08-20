@@ -10,11 +10,13 @@ export default {
     el.id = 'como-funciona';
     el.dataset.theme = 'light';
     el.innerHTML = `
+      <div class="cf-head container-pagina py-20 md:py-28">
+        <p class="section-eyebrow">${comoFuncionaData.eyebrow}</p>
+        <h2 class="section-title" data-reveal-blur>${comoFuncionaData.title}</h2>
+        <p class="section-sub" data-reveal>${comoFuncionaData.sub}</p>
+      </div>
       <div class="cf-sticky">
-        <div class="container-pagina py-20 md:py-28">
-          <p class="section-eyebrow">${comoFuncionaData.eyebrow}</p>
-          <h2 class="section-title" data-reveal-blur>${comoFuncionaData.title}</h2>
-          <p class="section-sub" data-reveal>${comoFuncionaData.sub}</p>
+        <div class="container-pagina">
           <div class="cf-path-mount" aria-hidden="true"></div>
           <ol class="cf-steps">
             ${comoFuncionaData.steps

@@ -35,3 +35,11 @@
 #cta-final .cta-primary {
   margin-top: 2.5rem;
 }
+
+/* A oferta escrita no fecho: 14 dias e onde o preço mora. */
+.ctaf-nota {
+  margin-top: 1.25rem;
+  max-width: 46ch;
+  font-size: var(--fs-label);
+  color: rgba(247, 248, 243, 0.5);
+}

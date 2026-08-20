@@ -6,7 +6,7 @@
     <title>Falow · Conversas que viram vendas</title>
     <meta
       name="description"
-      content="Automação de DMs e comentários do Instagram: regras de palavra-chave, sequências visuais e dashboard. O Falow responde em segundos e transforma conversas em vendas."
+      content="Automação de DMs e comentários do Instagram: regras de palavra-chave, sequências visuais e dashboard. O Falow responde em segundos e transforma conversas em vendas. Teste 14 dias grátis."
     />
     <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
@@ -17,7 +17,7 @@
     <meta property="og:title" content="Falow · Conversas que viram vendas" />
     <meta
       property="og:description"
-      content="Automação de DMs e comentários do Instagram: regras de palavra-chave, sequências visuais e dashboard. O Falow responde em segundos."
+      content="Automação de DMs e comentários do Instagram: regras de palavra-chave, sequências visuais e dashboard. O Falow responde em segundos. Teste 14 dias grátis."
     />
     <meta property="og:image" content="/og-cover.webp" />
     <meta property="og:locale" content="pt_BR" />
@@ -66,6 +66,8 @@
         place-items: center;
         overflow: hidden;
         background: #0b0d0c;
+        -webkit-mask-image: url(#pl-iris-mask);
+        mask-image: url(#pl-iris-mask);
       }
       /* Nasce com só o símbolo, centrado e grande: a palavra entra depois e a
          assinatura recua pro lugar dela. O deslocamento e a origem são os da
@@ -129,6 +131,18 @@
       </div>
       <p class="pl-tagline">Conversas que viram vendas.</p>
     </div>
+
+    <!-- Máscara geométrica da íris de saída do preloader: um raio de círculo
+         animado (via atributo SVG, direto pelo GSAP) é muito mais barato pro
+         navegador que recalcular um radial-gradient em CSS a cada frame. -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <mask id="pl-iris-mask" maskUnits="userSpaceOnUse" x="-10000" y="-10000" width="20000" height="20000">
+          <rect x="-10000" y="-10000" width="20000" height="20000" fill="#fff" />
+          <circle id="pl-iris" cx="0" cy="0" r="0" fill="#000" />
+        </mask>
+      </defs>
+    </svg>
 
     <div id="app">
       <main id="main"></main>

@@ -45,9 +45,9 @@ export const ASSINATURA = {
   razaoFuro: 241.26 / 344.33,
 };
 
-export function falowSymbol({ size = 64 } = {}) {
+export function falowSymbol({ size = 64, className = '' } = {}) {
   return `
-    <svg class="falow-symbol" width="${size}" height="${size}" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+    <svg class="falow-symbol${className ? ` ${className}` : ''}" width="${size}" height="${size}" viewBox="0 0 64 64" fill="none" aria-hidden="true">
       <path class="fs-arc" d="${SIMBOLO.arco}"
             stroke="#32E875" stroke-width="${SIMBOLO.espessura}" stroke-linecap="round"/>
       <circle class="fs-dot" cx="${SIMBOLO.ponto.cx}" cy="${SIMBOLO.ponto.cy}" r="${SIMBOLO.ponto.r}"

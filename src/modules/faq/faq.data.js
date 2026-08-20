@@ -1,3 +1,5 @@
+import { OFERTA } from '../../shared/config/oferta.js';
+
 export const faqData = {
   eyebrow: 'FAQ',
   title: 'Perguntas diretas, respostas diretas.',
@@ -25,6 +27,14 @@ export const faqData = {
     {
       q: 'Qual a velocidade de resposta?',
       a: 'Segundos. A mensagem chega, a regra casa, a resposta sai.',
+    },
+    {
+      q: `Como funcionam os ${OFERTA.dias} dias grátis?`,
+      a: `Você cria a conta e usa o Falow por ${OFERTA.dias} dias com tudo liberado: conecta o Instagram, monta as suas sequências e responde de verdade. Não é demonstração, é a sua operação rodando.`,
+    },
+    {
+      q: 'Quanto custa?',
+      a: 'Os planos ficam dentro da plataforma, não aqui na página. Você entra, testa e escolhe por lá, com os valores atualizados na sua frente.',
     },
     {
       q: 'E se eu quiser cancelar?',

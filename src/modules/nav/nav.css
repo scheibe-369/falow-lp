@@ -53,8 +53,8 @@
   min-height: 44px;
 }
 
-/* Ícone oficial (icone.png). É colorido, não monocromático, então serve
-   nos dois temas sem variante. */
+/* Símbolo oficial em vetor (mesma fonte do brandMark do rodapé). Cores fixas
+   da marca (verde + amarelo), então serve nos dois temas sem variante. */
 .nav-symbol {
   display: block;
   flex: none;

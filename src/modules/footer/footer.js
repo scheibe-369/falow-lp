@@ -9,7 +9,7 @@ export default {
     el.dataset.theme = 'dark';
     el.innerHTML = `
       <div class="container-pagina flex flex-col gap-8 py-12 md:flex-row md:items-center md:justify-between">
-        <div class="footer-brand" aria-label="Falow">${brandMark({ size: 24 })}</div>
+        <div class="footer-brand" role="img" aria-label="Falow">${brandMark({ size: 24 })}</div>
         <nav aria-label="Rodapé">
           <ul class="flex flex-wrap gap-6">
             ${footerData.links

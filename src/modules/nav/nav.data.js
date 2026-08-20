@@ -1,3 +1,5 @@
+import { OFERTA, destinoCta } from '../../shared/config/oferta.js';
+
 export const navData = {
   links: [
     { label: 'Como funciona', href: '#como-funciona' },
@@ -5,5 +7,5 @@ export const navData = {
     { label: 'Recursos', href: '#diferenciais' },
     { label: 'FAQ', href: '#faq' },
   ],
-  cta: { label: 'Começar agora', href: '#comecar' },
+  cta: { label: OFERTA.ctaPadrao, href: destinoCta },
 };

@@ -15,6 +15,7 @@ export default {
         <h2 class="ctaf-tagline" data-reveal-blur>${ctaFinalData.tagline}</h2>
         <p class="ctaf-sub" data-reveal>${ctaFinalData.sub}</p>
         ${ctaButton({ ...ctaFinalData.cta, size: 'cta-lg' })}
+        <p class="ctaf-nota" data-reveal>${ctaFinalData.nota}</p>
       </div>
     `;
     return el;

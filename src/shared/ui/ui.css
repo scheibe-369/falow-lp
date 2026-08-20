@@ -60,7 +60,7 @@
 
 .section-title {
   margin-top: 1rem;
-  font-size: clamp(1.9rem, 4.2vw, 3rem);
+  font-size: var(--fs-title);
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: -0.025em;

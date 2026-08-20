@@ -26,7 +26,7 @@
 
 /* --- Marquee de gatilhos (track 3x, -33.333%) --- */
 .marquee {
-  overflow: clip;
+  overflow: hidden;
   background-color: #0b0d0c;
   border-block: 1px solid rgba(255, 255, 255, 0.08);
   padding-block: 1rem;
@@ -38,6 +38,7 @@
   align-items: center;
   gap: 1.75rem;
   width: max-content;
+  background-color: #0b0d0c;
 }
 
 .marquee-item {

@@ -2,11 +2,24 @@
   background: var(--color-clear-white);
 }
 
-/* Modo cinematográfico (>=768px, ativado por JS): a seção fica alta e o
-   conteúdo trava em sticky enquanto o path se desenha. */
+/* Modo cinematográfico (>=768px, ativado por JS): a seção fica alta, o
+   cabeçalho (cf-head) rola normal e sai de cena, e só o caminho + os cards
+   (cf-sticky) travam em sticky pelo resto do scroll. Separar o cabeçalho do
+   bloco sticky é o que garante espaço pros 4 cards caberem no 100svh: antes
+   os dois dividiam a mesma caixa e o último card estourava o overflow: clip
+   em qualquer tela até ~1000px de altura (notebook, tablet deitado). */
 @media (min-width: 768px) {
   #como-funciona.is-cine {
     height: 300vh;
+    /* Trava o ritmo vertical dos cards pela altura da viewport, não só pela
+       largura: card-padding/card-title herdados crescem com a LARGURA (ver
+       global.css), o que sobra card em tela larga e baixa. */
+    --card-padding: clamp(0.65rem, 2.1svh, 2.5rem);
+    --card-title: clamp(0.95rem, 1.85svh, 1.45rem);
+  }
+
+  #como-funciona.is-cine .cf-head {
+    padding-block: clamp(3rem, 9svh, 7rem) clamp(1rem, 3svh, 2rem);
   }
 
   #como-funciona.is-cine .cf-sticky {
@@ -20,12 +33,12 @@
 
   #como-funciona.is-cine .cf-sticky > div {
     width: 100%;
-    padding-block: 6rem 2rem;
+    padding-block: clamp(0.5rem, 3svh, 2.5rem);
   }
 
   #como-funciona.is-cine .cf-steps {
-    margin-top: 1.75rem;
-    gap: 1.1rem;
+    margin-top: 0;
+    gap: clamp(0.3rem, 1.5svh, 1.1rem);
   }
 }
 

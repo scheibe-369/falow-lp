@@ -31,6 +31,18 @@ atendimento. Podem entrar depois, mas nao inventar capacidades no copy.
 - **Prova social: ainda nao existe.** Nao inventar numeros, depoimentos ou
   logos de clientes. Deixar a secao estruturada mas vazia/placeholder ate o
   usuario fornecer dados reais.
+- **Oferta: 14 dias gratis, so no fecho da pagina.** O teste aparece na secao
+  de oferta, no FAQ e no CTA final. Topo (nav e hero) fica com o rotulo neutro
+  "Comecar agora": quem acabou de chegar ainda nao sabe o que e o Falow, o
+  teste e argumento pra quem ja desceu a pagina. Numero e rotulos vem de
+  `src/shared/config/oferta.js` (`ctaPadrao` no topo, `ctaTeste` no fecho),
+  nunca hard-coded no modulo.
+- **Preco NAO aparece na landing.** Sem tabela de planos, sem "a partir de",
+  sem faixa de valor. Planos e precos ficam dentro da plataforma (mesmo modelo
+  do ManyChat), a LP so leva pro cadastro. O modulo `pricing-cta` e secao de
+  oferta, nao de precificacao.
+- **O teste pede cartao de credito na entrada.** Entao a copy nunca promete
+  "sem cartao": o redutor de risco e "cancela quando quiser".
 
 ### Referencia direta
 - **ManyChat** e a referencia funcional/categoria principal (builder de
@@ -154,7 +166,10 @@ falow-lp/
   aproximar o anel no olho.
 
 ### Pendencias com o usuario
-- Termos/Privacidade do footer; planos/precos (modulo pricing-cta vira tabela).
+- **URL de cadastro da plataforma** (destino de todo CTA). Enquanto nao existe,
+  `cadastroUrl` em `src/shared/config/oferta.js` fica `null` e os botoes rolam
+  pra secao de oferta. Chegou a URL, muda so essa linha.
+- Termos/Privacidade do footer.
 - Dominio de deploy + aprovacao para primeiro commit.
 
 ## Regras de trabalho

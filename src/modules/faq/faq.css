@@ -31,29 +31,51 @@
   display: none;
 }
 
+/* "+" desenhado com duas barras via gradiente, não texto: o glifo de fonte não
+   fica perfeitamente centralizado no box (baseline/hinting), e girar 45° pra
+   virar "×" expunha esse desvio como descentralização + glitch de anti-alias
+   no fim da transição. Duas barras centralizadas geometricamente não têm esse problema.
+   Rotação amarrada a .is-open (não a [open]): o JS só remove [open] depois que a
+   animação de altura termina, então usar [open] aqui atrasava o giro do ícone em
+   relação ao fechamento visual do card. .is-open é alternada no início do clique. */
 .faq-item summary::after {
-  content: '+';
+  content: '';
   flex: none;
-  display: grid;
-  place-items: center;
   width: 28px;
   height: 28px;
   border-radius: 999px;
-  background: var(--color-surface-soft);
-  color: var(--color-green-dark);
-  font-weight: 600;
+  background-color: var(--color-surface-soft);
+  background-image:
+    linear-gradient(var(--color-green-dark), var(--color-green-dark)),
+    linear-gradient(var(--color-green-dark), var(--color-green-dark));
+  background-size:
+    10px 2px,
+    2px 10px;
+  background-position: center;
+  background-repeat: no-repeat;
   transition: rotate var(--duration-base) var(--ease-standard);
 }
 
-.faq-item[open] summary::after {
+.faq-item.is-open summary::after {
   rotate: 45deg;
 }
 
+/* Sem transition aqui: a animação de altura roda via Web Animations API (JS).
+   O JS controla o timing do atributo [open] (fica true durante toda a animação,
+   inclusive fechando), então a regra nativa de display:none nunca chega a cortar
+   a transição. [open] só define o repouso pós-animação (height:auto responsivo). */
 .faq-answer {
-  padding: 0 1.25rem 1.1rem;
+  height: 0;
+  overflow: hidden;
+  padding: 0 1.25rem;
+}
+
+.faq-item[open] .faq-answer {
+  height: auto;
 }
 
 .faq-answer p {
+  padding-bottom: 1.1rem;
   font-size: var(--fs-body);
   line-height: 1.6;
   color: var(--color-text-secondary);

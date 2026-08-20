@@ -225,10 +225,30 @@ Tailwind v4 + JS vanilla modular (Feature-Sliced) + GSAP npm.
       GSAP gera um deslocamento lixo: o estado inicial escondido tem que ser por
       opacidade. Verificado em 1440 e 375, dev e build.
 
+## Oferta: 14 dias grátis, preço só na plataforma
+- [x] `src/shared/config/oferta.js`: fonte única do teste (dias, rótulos) e do
+      destino de todo CTA de conversão. Nav, ink-menu, hero, seção de oferta,
+      FAQ e CTA final leem daqui, ninguém repete o número.
+- [x] Teste só no fecho da página: título e chip da seção de oferta, item de
+      FAQ, botão "Testar 14 dias grátis" + nota no CTA final. Nav e hero ficam
+      com "Começar agora" (`ctaPadrao`), sem microcopy de teste no topo:
+      decisão do usuário, o teste é argumento de quem desceu a página inteira.
+- [x] Preço fora da landing: nada de tabela. A seção de oferta diz onde o valor
+      mora ("planos e preços você vê dentro da plataforma") e o FAQ ganhou um
+      "Quanto custa?" que aponta pro mesmo lugar. `pricing-cta` é seção de
+      oferta, não de precificação (decisão registrada no CLAUDE.md).
+- [x] Sem promessa de "sem cartão": o teste pede cartão na entrada, então o
+      redutor de risco continua sendo "cancela quando quiser".
+- [x] Meta description e og:description com o teste.
+- [x] Verificado em 1440 e 375 no build (`npm run preview`): o botão da faixa de
+      oferta ganhou `flex: none` + `nowrap` (o rótulo mais longo quebrava em
+      três linhas no layout em linha), sem overflow horizontal.
+
 ## Pendências (com o usuário)
+- [ ] **URL de cadastro da plataforma.** Enquanto `cadastroUrl` for `null`, os
+      CTAs rolam pra seção de oferta. Chegou a URL, muda uma linha em
+      `src/shared/config/oferta.js` e a página inteira aponta pro app.
 - [ ] Links de Termos/Privacidade do footer.
-- [ ] Planos/preços (módulo `pricing-cta` troca de CTA pra tabela sem tocar
-      no resto).
 - [ ] Domínio de deploy (Cloudflare Pages, conta padrão) e aprovação pra
       primeiro commit (regra: nunca commitar sem aprovação explícita).
 - [ ] Confirmar se "Inbox unificada" entra no roadmap da LP (hoje fora, seção

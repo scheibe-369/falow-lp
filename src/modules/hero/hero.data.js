@@ -1,13 +1,15 @@
+import { OFERTA, destinoCta } from '../../shared/config/oferta.js';
+
 export const heroData = {
   eyebrow: 'Automação de DM e comentário no Instagram, sem código',
   title: 'Seu Instagram responde em segundos. Você vende.',
   sub: 'Regras de palavra-chave e sequências visuais que transformam DM e comentário em conversa, e conversa em venda.',
-  ctaPrimary: { label: 'Começar agora', href: '#comecar' },
+  ctaPrimary: { label: OFERTA.ctaPadrao, href: destinoCta },
   ctaGhost: { label: 'Ver como funciona', href: '#como-funciona' },
 
   bg: {
     src: '/hero-bg.webp',
-    srcset: '/hero-bg-960.webp 960w, /hero-bg.webp 1920w',
+    srcset: '/hero-bg-960.webp 960w, /hero-bg-1440.webp 1440w, /hero-bg.webp 1920w',
     width: 1920,
     height: 1024,
   },

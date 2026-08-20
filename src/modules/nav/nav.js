@@ -2,6 +2,7 @@ import './nav.css';
 import { navData } from './nav.data.js';
 import { ctaButton } from '../../shared/ui/ctaButton.js';
 import { falowWordmark } from '../../shared/ui/falowWordmark.js';
+import { falowSymbol } from '../../shared/ui/brandMark.js';
 
 export default {
   id: 'nav',
@@ -12,8 +13,7 @@ export default {
     el.innerHTML = `
       <div class="nav-bar container-pagina flex items-center justify-between py-4">
         <a class="nav-brand" href="#hero" aria-label="Falow, início">
-          <img class="nav-symbol" src="/brand/falow-icone.webp" alt=""
-               width="128" height="128" fetchpriority="high" decoding="async">
+          ${falowSymbol({ size: 28, className: 'nav-symbol' })}
           <span class="nav-wordmark">${falowWordmark()}</span>
         </a>
         <nav aria-label="Principal" class="nav-links-inline">

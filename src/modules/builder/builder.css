@@ -202,6 +202,12 @@
   background: var(--color-falow-green);
 }
 
+/* Sem flex-wrap aqui: no modo cinematográfico (>=768px) os fios SVG têm
+   coordenadas fixas, calibradas pro card "Botões" na altura original de uma
+   linha só. Se o badge quebrasse linha aqui o card cresceria e o fio
+   (que não sabe nada sobre a altura real do card) ficaria desalinhado,
+   sobrando espaço vazio e o traço pulando pro node errado. O wrap fica
+   isolado pro layout mobile, que não usa os fios SVG (ver @media abaixo). */
 .sq-node-badges {
   display: flex;
   gap: 0.35rem;
@@ -217,10 +223,66 @@
   background: var(--color-clear-white);
 }
 
-@media (max-width: 640px) {
+/* Abaixo de 768px a montagem cinematográfica (JS, mm.add) nunca liga, o mockup
+   fica estático. Nessa faixa, reposicionar os nodes em % (pensados pro canvas
+   largo do desktop, aspect-ratio 2/1) empilhava card em cima de card assim que
+   o texto quebrava linha. Vira uma coluna: os cards em fluxo normal (sem
+   posição absoluta, sem overlap), ligados por um fio vertical que ENCOSTA nos
+   dois cards (top:100% até 100%+gap, sem sobrar vão, senão a linha fica
+   boiando e não lê como conexão) com um ponto centralizado exatamente no meio
+   do fio. O x do fio sai da mesma conta do padding+ícone do card (não um
+   valor solto), pra bater o centro do ícone com o centro do fio de verdade. */
+@media (max-width: 767px) {
   .sq-canvas {
     aspect-ratio: auto;
-    height: 20rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    padding: 1rem;
+  }
+
+  .sq-wires {
+    display: none;
+  }
+
+  .sq-node {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+  }
+
+  .sq-node-badges {
+    flex-wrap: wrap;
+  }
+
+  /* top: 100% aqui é 100% da padding box do node (containing block do
+     pseudo), que NÃO inclui a border de 1px em cima+embaixo do .sq-node.
+     Sem o +2px (a border toda, topo+base) a linha nasce 2px curta e some
+     por trás do card antes de sequer sair dele: medido em produção, gap de
+     2.1px consistente nos 3 conectores. +2px fecha na borda real do card. */
+  .sq-node:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: calc(0.7rem + 13px - 1.5px);
+    top: calc(100% + 2px);
+    width: 3px;
+    height: 1.75rem;
+    background: var(--color-falow-green);
+    z-index: 0;
+  }
+
+  .sq-node:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: calc(0.7rem + 13px - 4px);
+    top: calc(100% + 2px + 1.75rem / 2 - 4px);
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-falow-green);
+    z-index: 1;
   }
 
   .sq-active {

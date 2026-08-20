@@ -42,6 +42,7 @@ export function initPreloader() {
   const arco = el.querySelector('#pl-arc');
   const ponto = el.querySelector('#pl-dot');
   const tagline = el.querySelector('.pl-tagline');
+  const iris = document.getElementById('pl-iris');
 
   // A palavra entra no MESMO svg do símbolo: espaçamento e alinhamento saem
   // da viewBox oficial, sem medir nada. Vai antes do arco no DOM pra ficar
@@ -80,22 +81,29 @@ export function initPreloader() {
 
   // A íris nasce do furo do anel e cresce até cobrir o canto mais distante.
   // As medidas saem do arco já desenhado, no momento em que a abertura começa.
-  const iris = { cx: 0, cy: 0, r0: 0, rMax: 0 };
-  const abertura = { v: 0 };
+  // O raio anima direto no atributo do <circle> da máscara SVG (mask.css em
+  // index.html): o navegador só recalcula uma geometria simples por frame,
+  // bem mais barato que reconstruir um radial-gradient em CSS a cada tick.
+  const irisGeo = { cx: 0, cy: 0, r0: 0, rMax: 0 };
 
   function medirIris() {
     const r = arco.getBoundingClientRect();
-    iris.cx = r.left + r.width / 2;
-    iris.cy = r.top + r.height / 2;
-    iris.r0 = (r.width / 2) * ASSINATURA.razaoFuro;
+    irisGeo.cx = r.left + r.width / 2;
+    irisGeo.cy = r.top + r.height / 2;
+    irisGeo.r0 = (r.width / 2) * ASSINATURA.razaoFuro;
     const { innerWidth: w, innerHeight: h } = window;
-    iris.rMax =
+    irisGeo.rMax =
       Math.max(
-        Math.hypot(iris.cx, iris.cy),
-        Math.hypot(w - iris.cx, iris.cy),
-        Math.hypot(iris.cx, h - iris.cy),
-        Math.hypot(w - iris.cx, h - iris.cy)
+        Math.hypot(irisGeo.cx, irisGeo.cy),
+        Math.hypot(w - irisGeo.cx, irisGeo.cy),
+        Math.hypot(irisGeo.cx, h - irisGeo.cy),
+        Math.hypot(w - irisGeo.cx, h - irisGeo.cy)
       ) + 40;
+    if (iris) {
+      iris.setAttribute('cx', irisGeo.cx);
+      iris.setAttribute('cy', irisGeo.cy);
+      iris.setAttribute('r', irisGeo.r0);
+    }
   }
 
   const tl = gsap.timeline({
@@ -126,23 +134,13 @@ export function initPreloader() {
     // 4. a íris abre de dentro do furo do anel
     .to(caixa, { opacity: 0, scale: 1.08, duration: 0.5, ease: 'power2.in' }, 'iris')
     .to(tagline, { opacity: 0, duration: 0.32, ease: 'power2.in' }, 'iris')
-    // O tween anda de 0 a 1 e o raio é calculado no onUpdate: assim as medidas
-    // podem ser tiradas no onStart, sem depender de valor de função (que o GSAP
-    // congela no primeiro render do tween).
+    // As medidas (cx/cy/r0/rMax) só podem ser tiradas quando a abertura
+    // começa (onStart), daí o raio anima direto no atributo do <circle> da
+    // máscara: sem onUpdate, sem string, o GSAP tickeia só o atributo.
+    .call(medirIris, null, 'iris+=0.12')
     .to(
-      abertura,
-      {
-        v: 1,
-        duration: 0.85,
-        ease: 'power3.inOut',
-        onStart: medirIris,
-        onUpdate() {
-          const r = iris.r0 + (iris.rMax - iris.r0) * abertura.v;
-          const m = `radial-gradient(circle at ${iris.cx}px ${iris.cy}px, transparent ${r}px, #000 ${r + 1}px)`;
-          el.style.webkitMaskImage = m;
-          el.style.maskImage = m;
-        },
-      },
+      iris,
+      { attr: { r: () => irisGeo.rMax }, duration: 0.85, ease: 'power3.inOut' },
       'iris+=0.12'
     );
 

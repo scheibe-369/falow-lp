@@ -35,7 +35,7 @@ export function mockupSequencia({ blocks }) {
         <svg class="sq-wires" viewBox="0 0 640 320" preserveAspectRatio="none" aria-hidden="true">
           <path class="sq-wire" data-wire="0" d="M 118 160 C 170 160, 180 96, 232 96"/>
           <path class="sq-wire" data-wire="1" d="M 366 96 C 410 96, 414 150, 452 150"/>
-          <path class="sq-wire" data-wire="2" d="M 560 186 C 596 196, 600 236, 566 252"/>
+          <path class="sq-wire" data-wire="2" d="M 560 197 C 562 209, 558 219, 560 230"/>
           <circle class="sq-spark" data-spark="0" cx="118" cy="160" r="5"/>
           <circle class="sq-spark" data-spark="1" cx="452" cy="150" r="5"/>
         </svg>

@@ -43,3 +43,11 @@
   gap: 0.5rem;
   margin-top: 1rem;
 }
+
+/* No layout em linha o h2 e o texto disputam a largura e espremem o botão:
+   o rótulo da oferta é mais longo que um "Começar agora" e quebrava em três
+   linhas. O CTA não encolhe nem quebra. */
+.pricing-band .cta {
+  flex: none;
+  white-space: nowrap;
+}
