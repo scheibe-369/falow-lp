@@ -202,12 +202,12 @@
   background: var(--color-falow-green);
 }
 
-/* Sem flex-wrap aqui: no modo cinematográfico (>=768px) os fios SVG têm
-   coordenadas fixas, calibradas pro card "Botões" na altura original de uma
-   linha só. Se o badge quebrasse linha aqui o card cresceria e o fio
-   (que não sabe nada sobre a altura real do card) ficaria desalinhado,
-   sobrando espaço vazio e o traço pulando pro node errado. O wrap fica
-   isolado pro layout mobile, que não usa os fios SVG (ver @media abaixo). */
+/* Sem flex-wrap aqui: no modo cinematográfico (>=768px) os cards são
+   posicionados em % dentro do canvas, então card que cresce em altura avança
+   por cima do vizinho de baixo e come o vão onde o fio aparece. Os fios em si
+   já acompanham a caixa real do card (builder.js mede offsetWidth/Height a
+   cada sync), o problema aqui é sobreposição de layout, não desalinho de
+   traço. O wrap fica isolado pro layout mobile (ver @media abaixo). */
 .sq-node-badges {
   display: flex;
   gap: 0.35rem;

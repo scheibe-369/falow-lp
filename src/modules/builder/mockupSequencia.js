@@ -32,17 +32,22 @@ export function mockupSequencia({ blocks }) {
         <span class="sq-active"><span class="sq-active-dot"></span> Ativa</span>
       </div>
       <div class="sq-canvas">
+        <!-- Este "d" é o traçado original desenhado à mão e serve de fallback
+             sem JS. Com JS, builder.js reescreve os mesmos arcos a partir da
+             caixa medida de cada card, pra o fio encaixar em qualquer largura.
+             As frações de ancoragem lá saíram exatamente destas coordenadas:
+             mudou o desenho aqui, reconferir os specs de lá. -->
         <svg class="sq-wires" viewBox="0 0 640 320" preserveAspectRatio="none" aria-hidden="true">
           <path class="sq-wire" data-wire="0" d="M 118 160 C 170 160, 180 96, 232 96"/>
           <path class="sq-wire" data-wire="1" d="M 366 96 C 410 96, 414 150, 452 150"/>
-          <path class="sq-wire" data-wire="2" d="M 560 197 C 562 209, 558 219, 560 230"/>
+          <path class="sq-wire" data-wire="2" d="M 517 189 C 517 224, 438 200, 438 235"/>
           <circle class="sq-spark" data-spark="0" cx="118" cy="160" r="5"/>
           <circle class="sq-spark" data-spark="1" cx="452" cy="150" r="5"/>
         </svg>
         ${node({ id: 0, kind: 'gatilho', icon: ZAP, title: 'Gatilho', body: 'palavra-chave: "quero"', x: 3, y: 38, w: 26 })}
         ${node({ id: 1, kind: 'mensagem', icon: MSG, title: 'Mensagem', body: 'Chegou! Te mando o link?', x: 36, y: 18, w: 30 })}
         ${node({ id: 2, kind: 'botoes', icon: BTN, title: 'Botões', body: null, badges: ['Sim, quero', 'Depois'], x: 70, y: 36, w: 27 })}
-        ${node({ id: 3, kind: 'mensagem', icon: MSG, title: 'Mensagem', body: 'Aqui está 👉', x: 66, y: 72, w: 26 })}
+        ${node({ id: 3, kind: 'mensagem', icon: MSG, title: 'Mensagem', body: 'Aqui está 👉', x: 56, y: 72, w: 26 })}
       </div>
     </div>
   `;

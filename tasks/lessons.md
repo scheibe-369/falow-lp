@@ -71,3 +71,49 @@ A versão antiga travava a timeline inteira em `fonts.ready` (teto de 1.2s): tel
 preta parada, depois a animação. A espera vai no **fim** (uma pausa antes da
 revelação), não no começo. E a marcação do primeiro quadro mora no
 `index.html`, não no bundle, senão o preloader só pinta quando o JS chega.
+
+## 7. Traçado que já existe se remede, não se redesenha
+
+Os fios do mockup de sequências desencaixavam dos cards em telas diferentes
+porque o `d` era fixo no viewBox. A primeira tentativa trocou o desenho por
+uma fórmula genérica de bezier: encaixou, mas matou a curva (a fórmula
+escolhia o eixo da tangente pelo maior delta, então fio que sai pela lateral
+do card saía subindo reto, virava gancho). O usuário reclamou do formato, não
+do encaixe.
+
+Regra: quando o problema é **posicionamento** de algo que já foi desenhado à
+mão e aprovado, a saída é converter aquele desenho em fração da caixa real
+(medida) e manter os mesmos números. Não substituir por algoritmo genérico.
+As frações de `wireSpecs` em `builder.js` saíram literalmente do `d` de
+`mockupSequencia.js`; conferir uma coisa contra a outra ao mexer.
+
+Dois detalhes que vieram junto:
+- A tangente do bezier é a do **lado** de onde o fio nasce, nunca deduzida de
+  dx/dy.
+- O fio começa dentro do card de origem de propósito (o SVG fica atrás dos
+  nodes): o começo some sob o card e o que aparece já é o meio da curva. Isso
+  também garante que ele nunca boie longe da borda.
+
+## 8. Fio de fluxo precisa de vão e de desvio, não só de fórmula
+
+O terceiro fio do mockup (Botões -> Mensagem) saía uma reta vertical perfeita.
+Motivo medido no navegador, não no olho: as duas âncoras resolviam pro **mesmo
+x** (`dx = 0.2` num `dy` de 46). Bezier com controles alinhados no eixo é
+segmento de reta, por definição. Nenhum ajuste de `BOW` conserta isso.
+
+Regra: ao ancorar conector por fração de caixa, medir o `dx`/`dy` que aquelas
+frações produzem de fato. Fração diferente (`0.64` vs `0.82`) não garante
+coordenada diferente quando os cards têm origem e largura diferentes.
+
+E o arco só existe se houver espaço pros dois lados:
+- **Desvio lateral**: veio de mover o card de destino no eixo x (`66% -> 56%`).
+- **Vão vertical**: é o que encolhe sozinho em tela estreita (card cresce em px
+  quando o texto quebra, canvas escala em %). Por isso o braço vertical do
+  bezier passou a crescer junto com o desvio lateral
+  (`max(|dy| * 0.55, |dx| * 0.45)`): com vão curto a curva vira rampa
+  diagonal se o braço só olhar pro `dy`.
+
+Armadilha achada no caminho: **`min-height` em elemento com `aspect-ratio`
+também é piso de largura.** Subir `min-height` do `.sq-canvas` de 18rem pra
+22rem forçou 704px de largura mínima e estourou o grid. Não é caminho pra
+ganhar altura.
