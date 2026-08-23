@@ -129,9 +129,16 @@ no rodape. Nunca omitir.
 - **Rodar/buildar:** `npm run dev` (porta 5174) · `npm run build` ·
   `npm run preview`. Lighthouse atual: perf 94 · a11y 100 · bp 100 · seo 100.
 - **Deploy:** Cloudflare Pages, projeto **falow-lp**, no ar em
-  https://falow-lp.pages.dev (conta `dbcff9abde3df964100df4b1d3a41798`).
-  Sem dominio custom por ora (decisao do usuario: fica no `.pages.dev`).
-  Republicar:
+  **https://falow.app.br** (conta `dbcff9abde3df964100df4b1d3a41798`, zona
+  falow.app.br `09d44568d1ea95d779b5c56639fc4ba7`). A `falow-lp.pages.dev`
+  continua respondendo, mas e URL interna de teste: o link publico e o apex.
+  `www.falow.app.br` tambem esta anexado e serve o mesmo conteudo em 200. O
+  duplicado e resolvido pelo `<link rel="canonical">` do `index.html`, que
+  aponta pro apex. NAO da pra fazer 301 de www com `public/_redirects`: o
+  `_redirects` do Pages casa so em CAMINHO, nunca em hostname (isso e do
+  Netlify). Redirect de dominio exige Single Redirect na zona, e nenhum dos
+  dois tokens (MASTER nem DEPLOY) tem escopo de Rules: `/rulesets/phases/...`
+  responde 10000 nos dois. Republicar:
   ```
   $env:CLOUDFLARE_API_TOKEN = "<TOKEN DEPLOY>"
   $env:CLOUDFLARE_ACCOUNT_ID = "dbcff9abde3df964100df4b1d3a41798"
@@ -170,7 +177,10 @@ falow-lp/
   `cadastroUrl` em `src/shared/config/oferta.js` fica `null` e os botoes rolam
   pra secao de oferta. Chegou a URL, muda so essa linha.
 - Termos/Privacidade do footer.
-- Dominio de deploy + aprovacao para primeiro commit.
+- **Bug conhecido em ~768px:** o mockup do builder estoura a coluna e o card
+  "Botoes" fica cortado. Causa: `min-height: 18rem` em elemento com
+  `aspect-ratio: 2/1` (`.sq-canvas`) e piso de LARGURA tambem, forcando 576px,
+  mais que a coluna `3fr` nesse breakpoint. Nao corrigido ainda.
 
 ## Regras de trabalho
 

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sS https://api.cloudflare.com/*)",
+      "Bash(curl -sS -X POST https://api.cloudflare.com/*)",
+      "Bash(curl -sS -X PATCH https://api.cloudflare.com/*)"
+    ]
+  }
+}
